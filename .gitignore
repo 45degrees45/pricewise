@@ -7,3 +7,4 @@ __pycache__/
 *.pyc
 temp/
 =0.4.1
+.DS_Store

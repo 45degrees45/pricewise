@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip3 list:*)",
+      "WebSearch",
+      "WebFetch(domain:gist.github.com)",
+      "Bash(python3:*)",
+      "Bash(source:*)",
+      "Bash(pip install:*)",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "Bash(pip3 install:*)",
+      "Bash(pgrep:*)",
+      "Bash(ps:*)",
+      "Bash(kill:*)",
+      "Bash(/Users/apso/claude-projects/pricewise/venv/bin/python3:*)",
+      "Bash(pkill:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

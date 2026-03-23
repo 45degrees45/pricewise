@@ -8,3 +8,5 @@ __pycache__/
 temp/
 =0.4.1
 .DS_Store
+sa-key.json
+.venv/

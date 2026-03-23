@@ -1,12 +1,9 @@
-"""Shared OAuth helper for Google APIs (Drive + Sheets)."""
+"""Shared Google credentials helper — service account auth."""
 
-from pathlib import Path
+import json
+import os
 
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-
-from config import OAUTH_CREDENTIALS_PATH, OAUTH_TOKEN_PATH
+from google.oauth2 import service_account
 
 SCOPES = [
     "https://www.googleapis.com/auth/drive",
@@ -14,19 +11,8 @@ SCOPES = [
 ]
 
 
-def get_google_creds() -> Credentials:
-    """Return valid Google OAuth credentials, prompting login if needed."""
-    creds = None
-    token_path = Path(OAUTH_TOKEN_PATH)
-
-    if token_path.exists():
-        creds = Credentials.from_authorized_user_file(str(token_path), SCOPES)
-
-    if creds and creds.expired and creds.refresh_token:
-        creds.refresh(Request())
-    elif not creds or not creds.valid:
-        flow = InstalledAppFlow.from_client_secrets_file(OAUTH_CREDENTIALS_PATH, SCOPES)
-        creds = flow.run_local_server(port=0)
-
-    token_path.write_text(creds.to_json())
-    return creds
+def get_google_creds() -> service_account.Credentials:
+    """Return Google service account credentials from GOOGLE_SERVICE_ACCOUNT_JSON env var."""
+    sa_json = os.environ["GOOGLE_SERVICE_ACCOUNT_JSON"]
+    info = json.loads(sa_json)
+    return service_account.Credentials.from_service_account_info(info, scopes=SCOPES)

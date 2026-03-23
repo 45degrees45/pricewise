@@ -1,7 +1,9 @@
+import asyncio
 import logging
 import os
 from datetime import datetime
 
+from aiohttp import web
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (
     Application,
@@ -13,6 +15,7 @@ from telegram.ext import (
     filters,
 )
 
+import config
 from config import ALLOWED_USER_IDS, COLUMNS, TELEGRAM_TOKEN, TEMP_DIR
 from llm_parser import needs_confirmation, parse_receipt, parse_text
 from ocr import dual_ocr
@@ -484,6 +487,47 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     return ConversationHandler.END
 
 
+async def _run_webhook(ptb_app: Application) -> None:
+    """Run the bot with an aiohttp web server (webhook + health check).
+
+    If WEBHOOK_URL is set, registers the Telegram webhook.
+    Always binds to PORT so Cloud Run health checks pass.
+    """
+
+    async def health_handler(request: web.Request) -> web.Response:
+        return web.Response(text="OK")
+
+    async def telegram_handler(request: web.Request) -> web.Response:
+        data = await request.json()
+        update = Update.de_json(data, ptb_app.bot)
+        await ptb_app.update_queue.put(update)
+        return web.Response()
+
+    web_app = web.Application()
+    web_app.router.add_get("/healthz", health_handler)
+    web_app.router.add_post("/webhook", telegram_handler)
+
+    runner = web.AppRunner(web_app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", config.PORT)
+
+    async with ptb_app:
+        await ptb_app.start()
+        if config.WEBHOOK_URL:
+            await ptb_app.bot.set_webhook(f"{config.WEBHOOK_URL}/webhook")
+            logger.info("Webhook registered: %s/webhook", config.WEBHOOK_URL)
+        else:
+            logger.info("WEBHOOK_URL not set — server running but webhook not registered yet")
+        await site.start()
+        logger.info("Listening on port %d", config.PORT)
+        try:
+            await asyncio.Event().wait()
+        finally:
+            if config.WEBHOOK_URL:
+                await ptb_app.bot.delete_webhook()
+            await runner.cleanup()
+
+
 def main() -> None:
     app = Application.builder().token(TELEGRAM_TOKEN).build()
 
@@ -510,8 +554,15 @@ def main() -> None:
     app.add_handler(CommandHandler("deal", deal_check))
     app.add_handler(conv_handler)
 
-    logger.info("Bot starting...")
-    app.run_polling()
+    # On Cloud Run (K_SERVICE is set) always use the web server so the port is bound.
+    # Locally, fall back to polling when no WEBHOOK_URL is configured.
+    on_cloud_run = bool(os.getenv("K_SERVICE"))
+    if config.WEBHOOK_URL or on_cloud_run:
+        logger.info("Bot starting in webhook/server mode...")
+        asyncio.run(_run_webhook(app))
+    else:
+        logger.info("Bot starting in polling mode...")
+        app.run_polling()
 
 
 if __name__ == "__main__":

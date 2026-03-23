@@ -14,11 +14,12 @@ ALLOWED_USER_IDS = [
 ]
 
 # Google
-OAUTH_CREDENTIALS_PATH = os.environ.get(
-    "OAUTH_CREDENTIALS_PATH", "oauth_credentials.json"
-)
-OAUTH_TOKEN_PATH = os.environ.get("OAUTH_TOKEN_PATH", "token.json")
 SHEETS_ID = os.environ["SHEETS_ID"]
+GOOGLE_SERVICE_ACCOUNT_JSON = os.getenv("GOOGLE_SERVICE_ACCOUNT_JSON", "")
+
+# Cloud Run / webhook
+WEBHOOK_URL = os.getenv("WEBHOOK_URL", "")
+PORT = int(os.getenv("PORT", 8080))
 
 # Anthropic (optional – falls back to Ollama when unset)
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")

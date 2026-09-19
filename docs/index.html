@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PriceWise — Smart Grocery Price Tracker</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #22c55e;
+      --green-dark: #16a34a;
+      --green-light: #dcfce7;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #0d9488 100%);
+      color: white;
+      padding: 80px 24px 96px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-content { position: relative; max-width: 700px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .hero h1 span { color: #6ee7b7; }
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.85;
+      max-width: 500px;
+      margin: 0 auto 36px;
+    }
+    .cta-row {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 15px; font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-primary { background: var(--green); color: white; }
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+    }
+
+    /* ─── Layout ─── */
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 72px 0; }
+
+    /* ─── Features ─── */
+    .section-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      color: var(--green-dark); text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800; letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .section-sub { color: var(--muted); font-size: 1.05rem; max-width: 520px; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); }
+    .feature-icon {
+      font-size: 2rem;
+      background: var(--green-light);
+      width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+    .feature-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+    .feature-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+
+    /* ─── Screenshots ─── */
+    .screenshots-bg { background: linear-gradient(180deg, #f0fdf4 0%, var(--bg) 100%); }
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .screenshot-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .screenshot-card img {
+      width: 100%; display: block;
+      border-bottom: 1px solid var(--border);
+    }
+    .screenshot-caption {
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ─── Commands ─── */
+    .commands-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 32px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .commands-table th {
+      background: var(--green-light);
+      color: var(--green-dark);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 14px 20px;
+      text-align: left;
+    }
+    .commands-table td {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      font-size: 0.95rem;
+    }
+    .commands-table tr:hover td { background: #f8fafc; }
+    code {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.88rem;
+      color: var(--green-dark);
+    }
+
+    /* ─── How it works ─── */
+    .steps { display: flex; flex-direction: column; gap: 0; margin-top: 48px; }
+    .step {
+      display: flex; gap: 24px;
+      position: relative;
+      padding-bottom: 40px;
+    }
+    .step:last-child { padding-bottom: 0; }
+    .step-left { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+    .step-num {
+      width: 44px; height: 44px;
+      background: var(--green);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .step-line {
+      width: 2px;
+      flex: 1;
+      background: var(--border);
+      margin-top: 8px;
+    }
+    .step:last-child .step-line { display: none; }
+    .step-content { padding-top: 8px; }
+    .step-content h3 { font-weight: 700; margin-bottom: 6px; }
+    .step-content p { color: var(--muted); font-size: 0.95rem; }
+
+    /* ─── Tech stack ─── */
+    .tech-chips {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 32px;
+    }
+    .chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--muted);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 40px 24px;
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--green); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ─── Divider ─── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+  </style>
+</head>
+<body>
+
+<!-- ── Hero ── -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🛒 Telegram Price Tracker</div>
+    <h1>Know what you paid.<br><span>Every time.</span></h1>
+    <p>Send a receipt photo. PriceWise extracts every item, logs it to Google Sheets, and tells you if a price is a good deal based on your history.</p>
+    <div class="cta-row">
+      <a href="https://github.com/45degrees45/pricewise" class="btn btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        View on GitHub
+      </a>
+      <a href="#how-it-works" class="btn btn-secondary">
+        How it works →
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ── Features ── -->
+<section>
+  <div class="container">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything you need to track<br>grocery prices</h2>
+    <p class="section-sub">No apps to install. Just send a photo to a Telegram bot and let it handle the rest.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <h3>Receipt OCR</h3>
+        <p>Send any receipt photo or PDF. Dual OCR pipeline extracts every line item with high accuracy, even for blurry or skewed shots.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>LLM Parsing</h3>
+        <p>Claude AI (or local Ollama) normalizes messy OCR text into clean structured data — item name, price, quantity, store.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>Text Entry</h3>
+        <p>No receipt? Just type it: <em>"Bought eggs ₹60 at DMart"</em>. The bot parses natural language just as well.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Google Sheets Log</h3>
+        <p>Every purchase lands in your own Google Sheet. Sort, filter, and analyze your spending history however you like.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Price History</h3>
+        <p>Use <code>/best coconut</code> to see the min, max, and average price you've ever paid for any item.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <h3>Deal Checker</h3>
+        <p>Use <code>/deal 175 coconut</code> before you buy — get an instant good / fair / expensive verdict based on your history.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── Screenshots ── -->
+<section class="screenshots-bg">
+  <div class="container">
+    <div class="section-label">In Action</div>
+    <h2 class="section-title">From receipt photo to<br>Google Sheets in seconds</h2>
+
+    <div class="screenshots-grid">
+      <div class="screenshot-card">
+        <img src="demo/01-pdf-upload-and-processing.png" alt="PDF upload and processing">
+        <div class="screenshot-caption">Upload a receipt PDF — dual OCR extracts the text</div>
+      </div>
+      <div class="screenshot-card">
+        <img src="demo/02-parsed-items-summary.png" alt="Parsed items summary">
+        <div class="screenshot-caption">LLM parses items with confidence scores</div>
+      </div>
+      <div class="screenshot-card">
+        <img src="demo/03-review-item-picker.png" alt="Item review picker">
+        <div class="screenshot-caption">Review individual items before saving</div>
+      </div>
+      <div class="screenshot-card">
+        <img src="demo/04-item-detail-view.png" alt="Item detail and edit">
+        <div class="screenshot-caption">Inline editing — fix any field with one tap</div>
+      </div>
+      <div class="screenshot-card">
+        <img src="demo/05-google-sheets-output.png" alt="Google Sheets output">
+        <div class="screenshot-caption">All purchases logged to your Google Sheet</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── How it works ── -->
+<section id="how-it-works">
+  <div class="container">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Four steps from photo<br>to price history</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>Send a receipt</h3>
+          <p>Photo, full-resolution image, or PDF — all accepted. Or describe the purchase in plain text.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>Bot extracts items</h3>
+          <p>Dual OCR (pytesseract + pdf2image) captures the text, then Claude or Ollama parses it into structured line items.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>Review &amp; edit</h3>
+          <p>Tap through items one by one. Edit any field inline before saving — no typos reach your sheet.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">4</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>Price history at your fingertips</h3>
+          <p>Use <code>/best</code> and <code>/deal</code> commands to query your history and make smarter buying decisions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── Commands ── -->
+<section style="background: #f0fdf4;">
+  <div class="container">
+    <div class="section-label">Commands</div>
+    <h2 class="section-title">Simple bot commands</h2>
+
+    <table class="commands-table">
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>What it does</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>/best &lt;item&gt;</code></td>
+          <td>Price history — min, max, average across all purchases</td>
+          <td><code>/best coconut</code></td>
+        </tr>
+        <tr>
+          <td><code>/deal &lt;price&gt; &lt;item&gt;</code></td>
+          <td>Is this price good, fair, or expensive vs. your history?</td>
+          <td><code>/deal 175 coconut</code></td>
+        </tr>
+        <tr>
+          <td><code>/cancel</code></td>
+          <td>Discard the current pending receipt entry</td>
+          <td><code>/cancel</code></td>
+        </tr>
+        <tr>
+          <td>Text message</td>
+          <td>Log a purchase in plain language</td>
+          <td><em>Bought kadachakka ₹100 at Kottayam market</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── Tech stack ── -->
+<section>
+  <div class="container">
+    <div class="section-label">Tech Stack</div>
+    <h2 class="section-title">Built with</h2>
+    <p class="section-sub">Lightweight Python stack, runs on any VPS or home server.</p>
+    <div class="tech-chips">
+      <span class="chip">🐍 Python</span>
+      <span class="chip">✈️ Telegram Bot API</span>
+      <span class="chip">🤖 Claude Sonnet</span>
+      <span class="chip">🦙 Ollama (fallback)</span>
+      <span class="chip">📄 Google Sheets</span>
+      <span class="chip">👁️ pytesseract</span>
+      <span class="chip">📑 pdf2image</span>
+      <span class="chip">🐳 Docker</span>
+      <span class="chip">🔍 RapidFuzz</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <p>PriceWise · Open source on <a href="https://github.com/45degrees45/pricewise">GitHub</a></p>
+  <p style="margin-top: 8px; font-size: 0.82rem; opacity: 0.6;">Track smarter. Spend less.</p>
+</footer>
+
+</body>
+</html>

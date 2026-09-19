@@ -31,6 +31,8 @@ OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.2")
 
 # Sheet structure
 SHEET_NAME = "Purchases"
+SPOTS_SHEET_NAME = "Spots"
+SPOTS_COLUMNS = ["Date", "Item", "Shop", "Location", "Price", "Unit", "Quality", "Reporter", "Notes"]
 COLUMNS = [
     "Date",
     "Item",

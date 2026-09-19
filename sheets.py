@@ -11,6 +11,8 @@ from config import (
     FUZZY_MATCH_CUTOFF,
     SHEET_NAME,
     SHEETS_ID,
+    SPOTS_SHEET_NAME,
+    SPOTS_COLUMNS,
 )
 from google_auth import get_google_creds
 
@@ -101,6 +103,58 @@ def find_best_price(item_query: str) -> dict | None:
         "count": len(matches),
         "matches": matches,
     }
+
+
+def _get_spots_sheet() -> gspread.Worksheet:
+    client = _get_client()
+    spreadsheet = client.open_by_key(SHEETS_ID)
+    try:
+        worksheet = spreadsheet.worksheet(SPOTS_SHEET_NAME)
+    except gspread.WorksheetNotFound:
+        worksheet = spreadsheet.add_worksheet(title=SPOTS_SHEET_NAME, rows=1000, cols=len(SPOTS_COLUMNS))
+        worksheet.append_row(SPOTS_COLUMNS)
+        logger.info("Created worksheet '%s' with headers", SPOTS_SHEET_NAME)
+    return worksheet
+
+
+def add_spot(data: dict) -> int:
+    """Add a community-reported cheapest spot."""
+    sheet = _get_spots_sheet()
+    row = [
+        data.get("date", datetime.now().strftime("%Y-%m-%d")),
+        data.get("item", "").strip(),
+        data.get("shop", "").strip(),
+        data.get("location", "").strip(),
+        str(data.get("price", "")),
+        data.get("unit", "per kg"),
+        str(data.get("quality", "")),
+        data.get("reporter", "Anonymous").strip() or "Anonymous",
+        data.get("notes", "").strip(),
+    ]
+    sheet.append_row(row, value_input_option="USER_ENTERED")
+    return sheet.row_count
+
+
+def get_spots(item_query: str | None = None) -> list[dict]:
+    """Return community spots, optionally filtered by item using fuzzy match."""
+    sheet = _get_spots_sheet()
+    records = sheet.get_all_records()
+    if not item_query:
+        return records
+
+    matches = []
+    for row in records:
+        score = fuzz.token_set_ratio(item_query.lower(), str(row.get("Item", "")).lower())
+        if score >= FUZZY_MATCH_CUTOFF:
+            matches.append(row)
+    return matches
+
+
+def get_all_spots() -> list[dict]:
+    """Return all community spots sorted by item then price."""
+    records = get_spots()
+    records.sort(key=lambda r: (str(r.get("Item", "")).lower(), float(r.get("Price", 0) or 0)))
+    return records
 
 
 def is_good_deal(item_query: str, proposed_price: float) -> dict:

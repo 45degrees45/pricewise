@@ -129,6 +129,98 @@
 
     /* ── Empty state ── */
     #empty { display: none; padding: 40px 16px; text-align: center; color: var(--muted); }
+
+    /* ── Community spot bar ── */
+    .spot-bar {
+      background: rgba(16,185,129,0.07);
+      border-bottom: 1px solid var(--border);
+      padding: 7px 16px 8px 44px;
+      font-size: 11px; color: #6ee7b7;
+      display: flex; flex-wrap: wrap; gap: 6px 12px;
+    }
+    .spot-bar.hidden { display: none; }
+    .spot-entry { display: flex; align-items: center; gap: 5px; }
+    .spot-pin { opacity: 0.7; }
+    .spot-price { font-weight: 700; }
+    .spot-shop { color: var(--muted); }
+    .spot-quality { letter-spacing: -1px; }
+
+    /* ── FAB ── */
+    .fab {
+      position: fixed; bottom: 24px; right: 20px; z-index: 200;
+      background: var(--accent); color: white;
+      border: none; border-radius: 100px;
+      padding: 14px 20px; font-size: 14px; font-weight: 700;
+      cursor: pointer; box-shadow: 0 4px 20px rgba(16,185,129,0.45);
+      display: flex; align-items: center; gap: 8px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .fab:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(16,185,129,0.5); }
+
+    /* ── Modal ── */
+    .modal-bg {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+      align-items: flex-end; justify-content: center;
+    }
+    .modal-bg.open { display: flex; }
+    .modal {
+      background: #1e293b; width: 100%; max-width: 520px;
+      border-radius: 20px 20px 0 0;
+      padding: 24px 20px 36px;
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+      max-height: 92vh; overflow-y: auto;
+    }
+    .modal-title {
+      font-size: 1.1rem; font-weight: 800; margin-bottom: 18px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .modal-close {
+      background: none; border: none; color: var(--muted);
+      font-size: 1.4rem; cursor: pointer; line-height: 1;
+    }
+    .form-row { margin-bottom: 14px; }
+    .form-row label {
+      display: block; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.5px; color: var(--muted);
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .form-row input, .form-row select, .form-row textarea {
+      width: 100%; padding: 11px 14px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; color: var(--text); font-size: 14px;
+      outline: none;
+    }
+    .form-row input:focus, .form-row select:focus {
+      border-color: var(--accent);
+    }
+    .form-row select option { background: #1e293b; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    /* ── Quality stars ── */
+    .star-row {
+      display: flex; gap: 8px; margin-top: 4px;
+    }
+    .star-btn {
+      background: none; border: none;
+      font-size: 1.6rem; cursor: pointer;
+      opacity: 0.3; transition: opacity 0.1s, transform 0.1s;
+      padding: 2px;
+    }
+    .star-btn.active { opacity: 1; transform: scale(1.1); }
+
+    .submit-btn {
+      width: 100%; padding: 14px;
+      background: var(--accent); border: none;
+      border-radius: 12px; color: white;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      margin-top: 6px;
+      transition: opacity 0.15s;
+    }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .form-msg { text-align: center; font-size: 13px; margin-top: 10px; min-height: 20px; }
+    .form-msg.ok  { color: var(--green); }
+    .form-msg.err { color: var(--red); }
   </style>
 </head>
 <body>
@@ -727,6 +819,76 @@
 
 <div id="empty">No items found. Try searching in English or Malayalam.</div>
 
+<!-- ── Report Modal ── -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <div class="modal-title">
+      <span>📍 Report Cheapest Spot</span>
+      <button class="modal-close" id="modal-close">✕</button>
+    </div>
+
+    <div class="form-row">
+      <label>Item *</label>
+      <input id="f-item" type="text" placeholder="e.g. Tomato, Kadachakka…" autocomplete="off">
+    </div>
+
+    <div class="form-row-2">
+      <div class="form-row" style="margin-bottom:0">
+        <label>Shop / Stall *</label>
+        <input id="f-shop" type="text" placeholder="e.g. Rajan Stores">
+      </div>
+      <div class="form-row" style="margin-bottom:0">
+        <label>Location</label>
+        <input id="f-location" type="text" placeholder="e.g. Kottayam Main Market">
+      </div>
+    </div>
+
+    <div class="form-row-2" style="margin-top:14px">
+      <div class="form-row" style="margin-bottom:0">
+        <label>Price (₹) *</label>
+        <input id="f-price" type="number" placeholder="e.g. 85" min="0" step="0.5">
+      </div>
+      <div class="form-row" style="margin-bottom:0">
+        <label>Unit</label>
+        <select id="f-unit">
+          <option value="per kg">per kg</option>
+          <option value="per piece">per piece</option>
+          <option value="per 500g">per 500g</option>
+          <option value="per 250g">per 250g</option>
+          <option value="per 100g">per 100g</option>
+          <option value="per bunch">per bunch</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row" style="margin-top:14px">
+      <label>Quality</label>
+      <div class="star-row" id="star-row">
+        <button class="star-btn" data-v="1" title="Poor">⭐</button>
+        <button class="star-btn" data-v="2" title="Average">⭐</button>
+        <button class="star-btn" data-v="3" title="Good">⭐</button>
+        <button class="star-btn" data-v="4" title="Very Good">⭐</button>
+        <button class="star-btn" data-v="5" title="Excellent / Fresh">⭐</button>
+      </div>
+      <div id="quality-label" style="font-size:11px;color:var(--muted);margin-top:5px;">Tap to rate</div>
+    </div>
+
+    <div class="form-row">
+      <label>Your name (optional)</label>
+      <input id="f-reporter" type="text" placeholder="Leave blank for Anonymous">
+    </div>
+
+    <button class="submit-btn" id="submit-btn">Submit Report</button>
+    <div class="form-msg" id="form-msg"></div>
+  </div>
+</div>
+
+<!-- ── FAB ── -->
+<button class="fab" id="fab">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+  Report cheapest spot
+</button>
+
 <!-- ── Sources ── -->
 <div class="sources">
   <div class="sources-title">Sources (19 Sep 2026)</div>
@@ -741,24 +903,33 @@
 </div>
 
 <script>
+  // ── Config ────────────────────────────────────────────────────────
+  // Replace with your deployed Cloud Run bot URL after first deploy.
+  // Example: 'https://pricewise-bot-xxxx-uc.a.run.app'
+  const API = window.PRICEWISE_API || '';
+
+  const QUALITY_LABELS = ['', 'Poor', 'Average', 'Good', 'Very Good', 'Fresh & Excellent'];
+
+  // ── Search ────────────────────────────────────────────────────────
   const input = document.getElementById('search');
-  const rows = document.querySelectorAll('.item-row');
+  const allRows = document.querySelectorAll('.item-row');
   const sections = document.querySelectorAll('[data-section]');
   const empty = document.getElementById('empty');
 
-  input.addEventListener('input', () => {
+  function applySearch() {
     const q = input.value.toLowerCase().trim();
     let visibleCount = 0;
-
-    rows.forEach(row => {
+    allRows.forEach(row => {
       const name = row.dataset.name || '';
       const text = row.textContent.toLowerCase();
       const match = !q || name.includes(q) || text.includes(q);
       row.classList.toggle('hidden', !match);
+      const bar = row.nextElementSibling;
+      if (bar && bar.classList.contains('spot-bar')) {
+        bar.classList.toggle('hidden', !match);
+      }
       if (match) visibleCount++;
     });
-
-    // Hide section headers if no visible items follow them
     sections.forEach(sec => {
       let next = sec.nextElementSibling;
       let hasVisible = false;
@@ -770,8 +941,156 @@
       }
       sec.style.display = hasVisible ? '' : 'none';
     });
-
     empty.style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+  input.addEventListener('input', applySearch);
+
+  // ── Community Spots ───────────────────────────────────────────────
+  function insertSpotBars(spots) {
+    // Group spots by item (lowercase)
+    const byItem = {};
+    spots.forEach(s => {
+      const key = (s.Item || '').toLowerCase();
+      if (!byItem[key]) byItem[key] = [];
+      byItem[key].push(s);
+    });
+
+    allRows.forEach(row => {
+      const names = (row.dataset.name || '').split(' ');
+      // Find matching spots — any keyword overlap
+      let matched = [];
+      Object.entries(byItem).forEach(([itemKey, entries]) => {
+        if (names.some(n => n.length > 2 && itemKey.includes(n))) {
+          matched = matched.concat(entries);
+        }
+      });
+      if (!matched.length) return;
+
+      // Sort by price ascending, keep top 3
+      matched.sort((a, b) => parseFloat(a.Price || 0) - parseFloat(b.Price || 0));
+      const top = matched.slice(0, 3);
+
+      const bar = document.createElement('div');
+      bar.className = 'spot-bar';
+      bar.innerHTML = top.map(s => {
+        const stars = s.Quality ? '⭐'.repeat(Math.min(5, parseInt(s.Quality) || 0)) : '';
+        const ago = s.Date ? timeAgo(s.Date) : '';
+        const loc = [s.Shop, s.Location].filter(Boolean).join(', ');
+        return `<span class="spot-entry">
+          <span class="spot-pin">📍</span>
+          <span class="spot-price">₹${s.Price}${s.Unit ? ' ' + s.Unit : ''}</span>
+          <span class="spot-shop">${loc}</span>
+          ${stars ? `<span class="spot-quality">${stars}</span>` : ''}
+          ${s.Reporter && s.Reporter !== 'Anonymous' ? `<span class="spot-shop">· ${s.Reporter}</span>` : ''}
+          ${ago ? `<span class="spot-shop">· ${ago}</span>` : ''}
+        </span>`;
+      }).join('');
+
+      row.insertAdjacentElement('afterend', bar);
+    });
+  }
+
+  function timeAgo(dateStr) {
+    const d = new Date(dateStr);
+    if (isNaN(d)) return '';
+    const diff = Math.floor((Date.now() - d) / 86400000);
+    if (diff === 0) return 'today';
+    if (diff === 1) return 'yesterday';
+    if (diff < 30) return `${diff}d ago`;
+    return dateStr;
+  }
+
+  if (API) {
+    fetch(API + '/spots')
+      .then(r => r.ok ? r.json() : [])
+      .then(spots => { if (spots.length) insertSpotBars(spots); })
+      .catch(() => {});
+  }
+
+  // ── Modal ─────────────────────────────────────────────────────────
+  const modalBg = document.getElementById('modal-bg');
+  const fab = document.getElementById('fab');
+  const closeBtn = document.getElementById('modal-close');
+  let selectedQuality = 0;
+
+  fab.addEventListener('click', () => {
+    // Pre-fill item if search has a value
+    const q = input.value.trim();
+    if (q) document.getElementById('f-item').value = q;
+    modalBg.classList.add('open');
+  });
+  closeBtn.addEventListener('click', () => modalBg.classList.remove('open'));
+  modalBg.addEventListener('click', e => { if (e.target === modalBg) modalBg.classList.remove('open'); });
+
+  // Stars
+  const starBtns = document.querySelectorAll('.star-btn');
+  const qualityLabel = document.getElementById('quality-label');
+  starBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedQuality = parseInt(btn.dataset.v);
+      starBtns.forEach(b => b.classList.toggle('active', parseInt(b.dataset.v) <= selectedQuality));
+      qualityLabel.textContent = QUALITY_LABELS[selectedQuality] || '';
+    });
+  });
+
+  // Submit
+  document.getElementById('submit-btn').addEventListener('click', async () => {
+    const item  = document.getElementById('f-item').value.trim();
+    const shop  = document.getElementById('f-shop').value.trim();
+    const price = document.getElementById('f-price').value.trim();
+    const msg   = document.getElementById('form-msg');
+    const btn   = document.getElementById('submit-btn');
+
+    if (!item || !shop || !price) {
+      msg.textContent = 'Please fill in Item, Shop, and Price.';
+      msg.className = 'form-msg err';
+      return;
+    }
+
+    if (!API) {
+      msg.textContent = 'API not configured yet — ask the owner to deploy the bot.';
+      msg.className = 'form-msg err';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    msg.textContent = '';
+
+    try {
+      const body = {
+        item,
+        shop,
+        location: document.getElementById('f-location').value.trim(),
+        price: parseFloat(price),
+        unit: document.getElementById('f-unit').value,
+        quality: selectedQuality || '',
+        reporter: document.getElementById('f-reporter').value.trim(),
+      };
+      const res = await fetch(API + '/report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      if (res.ok) {
+        msg.textContent = '✅ Thanks! Your report was saved.';
+        msg.className = 'form-msg ok';
+        // Reset
+        ['f-item','f-shop','f-location','f-price','f-reporter'].forEach(id => document.getElementById(id).value = '');
+        selectedQuality = 0;
+        starBtns.forEach(b => b.classList.remove('active'));
+        qualityLabel.textContent = 'Tap to rate';
+        setTimeout(() => modalBg.classList.remove('open'), 1800);
+      } else {
+        throw new Error(await res.text());
+      }
+    } catch (e) {
+      msg.textContent = '❌ Error: ' + e.message;
+      msg.className = 'form-msg err';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Submit Report';
+    }
   });
 </script>
 </body>

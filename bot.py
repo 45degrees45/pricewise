@@ -19,7 +19,7 @@ import config
 from config import ALLOWED_USER_IDS, COLUMNS, TELEGRAM_TOKEN, TEMP_DIR
 from llm_parser import needs_confirmation, parse_receipt, parse_text
 from ocr import dual_ocr
-from sheets import append_purchase, find_best_price, is_good_deal
+from sheets import append_purchase, find_best_price, is_good_deal, add_spot, get_all_spots
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -494,6 +494,12 @@ async def _run_webhook(ptb_app: Application) -> None:
     Always binds to PORT so Cloud Run health checks pass.
     """
 
+    CORS_HEADERS = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+    }
+
     async def health_handler(request: web.Request) -> web.Response:
         return web.Response(text="OK")
 
@@ -503,9 +509,55 @@ async def _run_webhook(ptb_app: Application) -> None:
         await ptb_app.update_queue.put(update)
         return web.Response()
 
+    async def spots_get_handler(request: web.Request) -> web.Response:
+        """Return all community spots as JSON."""
+        import json as _json
+        try:
+            spots = get_all_spots()
+            return web.Response(
+                text=_json.dumps(spots, ensure_ascii=False),
+                content_type="application/json",
+                headers=CORS_HEADERS,
+            )
+        except Exception as exc:
+            logger.exception("GET /spots error")
+            return web.Response(status=500, text=str(exc), headers=CORS_HEADERS)
+
+    async def spots_post_handler(request: web.Request) -> web.Response:
+        """Accept a community spot report."""
+        import json as _json
+        if request.method == "OPTIONS":
+            return web.Response(status=204, headers=CORS_HEADERS)
+        try:
+            data = await request.json()
+            required = {"item", "shop", "price"}
+            missing = required - set(data.keys())
+            if missing:
+                return web.Response(
+                    status=400,
+                    text=_json.dumps({"error": f"Missing fields: {missing}"}),
+                    content_type="application/json",
+                    headers=CORS_HEADERS,
+                )
+            add_spot(data)
+            return web.Response(
+                text=_json.dumps({"ok": True}),
+                content_type="application/json",
+                headers=CORS_HEADERS,
+            )
+        except Exception as exc:
+            logger.exception("POST /report error")
+            return web.Response(status=500, text=str(exc), headers=CORS_HEADERS)
+
+    async def spots_options_handler(request: web.Request) -> web.Response:
+        return web.Response(status=204, headers=CORS_HEADERS)
+
     web_app = web.Application()
     web_app.router.add_get("/healthz", health_handler)
     web_app.router.add_post("/webhook", telegram_handler)
+    web_app.router.add_get("/spots", spots_get_handler)
+    web_app.router.add_post("/report", spots_post_handler)
+    web_app.router.add_options("/report", spots_options_handler)
 
     runner = web.AppRunner(web_app)
     await runner.setup()

@@ -920,7 +920,9 @@
   // ── Config ────────────────────────────────────────────────────────
   // Paste your Google Apps Script web app URL here after deploying.
   // See apps_script/Code.gs in the repo — deploy takes ~2 minutes.
-  const API = 'https://script.google.com/macros/s/AKfycbyKC1RqxqfF4DwdDXmkEYZjK-WtpOfkXiErVyFXvKIdGGO7sbT7aOl3Bxt9g4Ha63A/exec';
+  const API = 'https://pricewise-spots.loca.lt';
+  // Default header needed for localtunnel bypass page
+  const API_HEADERS = { 'bypass-tunnel-reminder': 'true', 'Content-Type': 'application/json' };
 
   const QUALITY_LABELS = ['', 'Poor', 'Average', 'Good', 'Very Good', 'Fresh & Excellent'];
 
@@ -1015,7 +1017,7 @@
   }
 
   if (API) {
-    fetch(API + '/spots')
+    fetch(API + '/spots', { headers: API_HEADERS })
       .then(r => r.ok ? r.json() : [])
       .then(spots => { if (spots.length) insertSpotBars(spots); })
       .catch(() => {});
@@ -1083,7 +1085,7 @@
       };
       const res = await fetch(API + '/report', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: API_HEADERS,
         body: JSON.stringify(body),
       });
       if (res.ok) {

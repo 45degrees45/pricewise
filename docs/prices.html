@@ -229,7 +229,7 @@
   <div class="header-top">
     <div>
       <h1>🛒 Kottayam <span>Price Guide</span></h1>
-      <div class="updated">Updated: 19 Sep 2026 · Wholesale + Retail data</div>
+      <div class="updated" id="updated-label">Loading prices…</div>
     </div>
     <a href="index.html" class="back-link">← PriceWise</a>
   </div>
@@ -245,591 +245,11 @@
   <span class="leg"><span class="dot" style="background:var(--red)"></span> Avoid paying above</span>
 </div>
 
-<!-- ════ DAILY VEGETABLES ════ -->
-<div class="section-head" data-section>Daily Vegetables</div>
+<!-- ── Dynamic price list (populated by JS from prices.json) ── -->
+<div id="price-list"></div>
 
-<div class="item-row" data-name="tomato takkali">
-  <div class="item-left">
-    <div class="item-name">Tomato</div>
-    <div class="item-ml">തക്കാളി</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹30/kg</span>
-    <span class="price-pill pill-yellow">₹33–39</span>
-    <span class="price-pill pill-red">↑50</span>
-  </div>
-</div>
+<!-- items rendered dynamically by JS below -->
 
-<div class="item-row" data-name="onion big savala savanna">
-  <div class="item-left">
-    <div class="item-name">Onion (Big)</div>
-    <div class="item-ml">സവാള</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹62/kg</span>
-    <span class="price-pill pill-yellow">₹68–81</span>
-    <span class="price-pill pill-red">↑85</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="shallot small onion kunjulli ulli">
-  <div class="item-left">
-    <div class="item-name">Shallot (Small Onion)</div>
-    <div class="item-ml">കുഞ്ഞുള്ളി / ചെറിയ ഉള്ളി</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹38/kg</span>
-    <span class="price-pill pill-yellow">₹42–49</span>
-    <span class="price-pill pill-red">↑77</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="potato urulakizhangu">
-  <div class="item-left">
-    <div class="item-name">Potato</div>
-    <div class="item-ml">ഉരുളക്കിഴങ്ങ്</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹29/kg</span>
-    <span class="price-pill pill-yellow">₹32–38</span>
-    <span class="price-pill pill-red">↑65</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="green chilli mulaku pachamilagu">
-  <div class="item-left">
-    <div class="item-name">Green Chilli</div>
-    <div class="item-ml">പച്ചമുളക്</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹59/kg</span>
-    <span class="price-pill pill-yellow">₹65–77</span>
-    <span class="price-pill pill-red">↑100</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="cucumber vellarikka">
-  <div class="item-left">
-    <div class="item-name">Cucumber</div>
-    <div class="item-ml">വെള്ളരിക്ക</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹27/kg</span>
-    <span class="price-pill pill-yellow">₹30–35</span>
-    <span class="price-pill pill-red">↑40</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="ladies finger okra vendakka">
-  <div class="item-left">
-    <div class="item-name">Ladies Finger (Okra)</div>
-    <div class="item-ml">വെണ്ടക്ക</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹38/kg</span>
-    <span class="price-pill pill-yellow">₹42–49</span>
-    <span class="price-pill pill-red">↑60</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="brinjal eggplant vazhuthananga">
-  <div class="item-left">
-    <div class="item-name">Brinjal (Eggplant)</div>
-    <div class="item-ml">വഴുതനങ്ങ</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹36/kg</span>
-    <span class="price-pill pill-yellow">₹40–47</span>
-    <span class="price-pill pill-red">↑60</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="brinjal big purple vazhuthananga valiya">
-  <div class="item-left">
-    <div class="item-name">Brinjal (Big)</div>
-    <div class="item-ml">വഴുതനങ്ങ (വലിയത്)</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹76/kg</span>
-    <span class="price-pill pill-yellow">₹84–99</span>
-    <span class="price-pill pill-red">↑110</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="bitter gourd karela pavakka">
-  <div class="item-left">
-    <div class="item-name">Bitter Gourd</div>
-    <div class="item-ml">പാവക്ക</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹42/kg</span>
-    <span class="price-pill pill-yellow">₹46–55</span>
-    <span class="price-pill pill-red">↑80</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="snake gourd padavalanga">
-  <div class="item-left">
-    <div class="item-name">Snake Gourd</div>
-    <div class="item-ml">പടവലങ്ങ</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹42/kg</span>
-    <span class="price-pill pill-yellow">₹46–55</span>
-    <span class="price-pill pill-red">↑60</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="bottle gourd churakka">
-  <div class="item-left">
-    <div class="item-name">Bottle Gourd</div>
-    <div class="item-ml">ചുരക്ക</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹30/kg</span>
-    <span class="price-pill pill-yellow">₹33–39</span>
-    <span class="price-pill pill-red">↑50</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="ash gourd kumbalanga winter melon">
-  <div class="item-left">
-    <div class="item-name">Ash Gourd</div>
-    <div class="item-ml">കുമ്പളങ്ങ</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹21/kg</span>
-    <span class="price-pill pill-yellow">₹23–27</span>
-    <span class="price-pill pill-red">↑35</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="ridge gourd peechinga">
-  <div class="item-left">
-    <div class="item-name">Ridge Gourd</div>
-    <div class="item-ml">പീച്ചിങ്ങ</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹41/kg</span>
-    <span class="price-pill pill-yellow">₹45–53</span>
-    <span class="price-pill pill-red">↑65</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="pumpkin mathan">
-  <div class="item-left">
-    <div class="item-name">Pumpkin</div>
-    <div class="item-ml">മത്തൻ</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹20/kg</span>
-    <span class="price-pill pill-yellow">₹22–26</span>
-    <span class="price-pill pill-red">↑35</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="cabbage muttakose">
-  <div class="item-left">
-    <div class="item-name">Cabbage</div>
-    <div class="item-ml">മുട്ടക്കോസ്</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹30/kg</span>
-    <span class="price-pill pill-yellow">₹33–39</span>
-    <span class="price-pill pill-red">↑50</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="cauliflower cauli">
-  <div class="item-left">
-    <div class="item-name">Cauliflower</div>
-    <div class="item-ml">കോളിഫ്ലവർ</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹39/kg</span>
-    <span class="price-pill pill-yellow">₹43–51</span>
-    <span class="price-pill pill-red">↑60</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="carrot karot">
-  <div class="item-left">
-    <div class="item-name">Carrot</div>
-    <div class="item-ml">കാരറ്റ്</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹58/kg</span>
-    <span class="price-pill pill-yellow">₹64–75</span>
-    <span class="price-pill pill-red">↑90</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="beetroot beet cheethara">
-  <div class="item-left">
-    <div class="item-name">Beetroot</div>
-    <div class="item-ml">ചീത്ര / ബീറ്റ്</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹43/kg</span>
-    <span class="price-pill pill-yellow">₹47–56</span>
-    <span class="price-pill pill-red">↑65</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="capsicum bell pepper simla mirch">
-  <div class="item-left">
-    <div class="item-name">Capsicum (Bell Pepper)</div>
-    <div class="item-ml">കുടമുളക്</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹54/kg</span>
-    <span class="price-pill pill-yellow">₹59–70</span>
-    <span class="price-pill pill-red">↑80</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="french beans beans frensh">
-  <div class="item-left">
-    <div class="item-name">French Beans</div>
-    <div class="item-ml">ഫ്രെഞ്ച് ബീൻസ്</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹80/kg</span>
-    <span class="price-pill pill-yellow">₹88–104</span>
-    <span class="price-pill pill-red">↑120</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="drumstick muringakka">
-  <div class="item-left">
-    <div class="item-name">Drumstick</div>
-    <div class="item-ml">മുരിങ്ങക്ക</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹45/kg</span>
-    <span class="price-pill pill-yellow">₹50–59</span>
-    <span class="price-pill pill-red">↑70</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="ivy gourd kovakka tindora">
-  <div class="item-left">
-    <div class="item-name">Ivy Gourd (Kovakka)</div>
-    <div class="item-ml">കോവക്ക</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹40/kg</span>
-    <span class="price-pill pill-yellow">₹44–52</span>
-    <span class="price-pill pill-red">↑65</span>
-  </div>
-</div>
-
-<!-- ════ KERALA SPECIALS ════ -->
-<div class="section-head" data-section>Kerala Specials</div>
-
-<div class="item-row" data-name="kadachakka breadfruit chakka">
-  <div class="item-left">
-    <div class="item-name">Kadachakka (Breadfruit)</div>
-    <div class="item-ml">കടചക്ക</div>
-    <div class="item-note">Sold per piece · 400–700g</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹88/pc</span>
-    <span class="price-pill pill-yellow">₹90–110</span>
-    <span class="price-pill pill-red">↑130</span>
-    <span class="you-bought">You: ₹100</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="coconut thenga">
-  <div class="item-left">
-    <div class="item-name">Coconut (Fresh)</div>
-    <div class="item-ml">തേങ്ങ</div>
-    <div class="item-note">Sold per piece — big ~2.5kg</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹63/kg</span>
-    <span class="price-pill pill-yellow">₹69–82/kg</span>
-    <span class="price-pill pill-red">↑200/pc</span>
-    <span class="you-bought">You: ₹175</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="tapioca kappa cassava maricheeni">
-  <div class="item-left">
-    <div class="item-name">Tapioca (Kappa)</div>
-    <div class="item-ml">കപ്പ / മരച്ചീനി</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹35/kg</span>
-    <span class="price-pill pill-yellow">₹38–45</span>
-    <span class="price-pill pill-red">↑55</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="koorkka chinese potato">
-  <div class="item-left">
-    <div class="item-name">Koorkka (Chinese Potato)</div>
-    <div class="item-ml">കൂർക്ക</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹80/kg</span>
-    <span class="price-pill pill-yellow">₹90–110</span>
-    <span class="price-pill pill-red">↑130</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="elephant yam chena suran">
-  <div class="item-left">
-    <div class="item-name">Elephant Yam (Chena)</div>
-    <div class="item-ml">ചേന</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹41/kg</span>
-    <span class="price-pill pill-yellow">₹45–53</span>
-    <span class="price-pill pill-red">↑65</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="colocasia taro chembu arbi">
-  <div class="item-left">
-    <div class="item-name">Colocasia (Chembu)</div>
-    <div class="item-ml">ചേമ്പ്</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹31/kg</span>
-    <span class="price-pill pill-yellow">₹34–40</span>
-    <span class="price-pill pill-red">↑55</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="sweet potato madhurakkizhangu">
-  <div class="item-left">
-    <div class="item-name">Sweet Potato</div>
-    <div class="item-ml">മധുരക്കിഴങ്ങ്</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹34/kg</span>
-    <span class="price-pill pill-yellow">₹37–44</span>
-    <span class="price-pill pill-red">↑60</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="raw mango manga pacha">
-  <div class="item-left">
-    <div class="item-name">Raw Mango</div>
-    <div class="item-ml">പച്ച മാങ്ങ</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹72/kg</span>
-    <span class="price-pill pill-yellow">₹79–94</span>
-    <span class="price-pill pill-red">↑110</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="raw banana plantain ethakka nenthrakaya vazhakka">
-  <div class="item-left">
-    <div class="item-name">Raw Banana (Plantain)</div>
-    <div class="item-ml">ഏത്തക്ക / നേന്ത്രക്കായ</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹11/kg</span>
-    <span class="price-pill pill-yellow">₹12–14</span>
-    <span class="price-pill pill-red">↑20</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="banana flower vazha poo mocha">
-  <div class="item-left">
-    <div class="item-name">Banana Flower</div>
-    <div class="item-ml">വാഴ പൂവ്</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹18/kg</span>
-    <span class="price-pill pill-yellow">₹20–23</span>
-    <span class="price-pill pill-red">↑30</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="bitter gourd cowpea payar thatta">
-  <div class="item-left">
-    <div class="item-name">Cowpea (Long Beans)</div>
-    <div class="item-ml">പയർ</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹60/kg</span>
-    <span class="price-pill pill-yellow">₹65–75</span>
-    <span class="price-pill pill-red">↑90</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="kudampuli pot tamarind gamboge fish tamarind">
-  <div class="item-left">
-    <div class="item-name">Kudampuli (Pot Tamarind)</div>
-    <div class="item-ml">കുടംപുളി</div>
-    <div class="item-note">Dried · sold by 100g</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹35/100g</span>
-    <span class="price-pill pill-yellow">₹40–50</span>
-    <span class="price-pill pill-red">↑60/100g</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="karikku tender coconut elaneer">
-  <div class="item-left">
-    <div class="item-name">Karikku (Tender Coconut)</div>
-    <div class="item-ml">കരിക്ക്</div>
-    <div class="item-note">Sold per piece</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹40/pc</span>
-    <span class="price-pill pill-yellow">₹50–70</span>
-    <span class="price-pill pill-red">↑90</span>
-    <span class="you-bought">Jo: ₹60 Kurichy ⭐⭐⭐⭐⭐</span>
-  </div>
-</div>
-
-<!-- ════ LEAFY GREENS ════ -->
-<div class="section-head" data-section>Leafy Greens</div>
-
-<div class="item-row" data-name="spinach cheera amaranth">
-  <div class="item-left">
-    <div class="item-name">Spinach / Amaranth</div>
-    <div class="item-ml">ചീര</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹8/kg</span>
-    <span class="price-pill pill-yellow">₹9–15</span>
-    <span class="price-pill pill-red">↑25</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="curry leaves karivepila">
-  <div class="item-left">
-    <div class="item-name">Curry Leaves</div>
-    <div class="item-ml">കറിവേപ്പില</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹34/kg</span>
-    <span class="price-pill pill-yellow">₹37–44</span>
-    <span class="price-pill pill-red">↑60</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="coriander leaves malli kothamalli">
-  <div class="item-left">
-    <div class="item-name">Coriander Leaves</div>
-    <div class="item-ml">കൊത്തമ്പാലി</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹12/kg</span>
-    <span class="price-pill pill-yellow">₹13–16</span>
-    <span class="price-pill pill-red">↑25</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="mint leaves puthina">
-  <div class="item-left">
-    <div class="item-name">Mint Leaves</div>
-    <div class="item-ml">പുതിന</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹6/kg</span>
-    <span class="price-pill pill-yellow">₹7–8</span>
-    <span class="price-pill pill-red">↑15</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="colocasia leaves chembu ela taro leaves">
-  <div class="item-left">
-    <div class="item-name">Colocasia Leaves</div>
-    <div class="item-ml">ചേമ്പ് ഇല</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹17/kg</span>
-    <span class="price-pill pill-yellow">₹19–22</span>
-    <span class="price-pill pill-red">↑30</span>
-  </div>
-</div>
-
-<!-- ════ SPICES & STAPLES ════ -->
-<div class="section-head" data-section>Spices &amp; Staples</div>
-
-<div class="item-row" data-name="ginger inji">
-  <div class="item-left">
-    <div class="item-name">Ginger</div>
-    <div class="item-ml">ഇഞ്ചി</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹127/kg</span>
-    <span class="price-pill pill-yellow">₹140–165</span>
-    <span class="price-pill pill-red">↑200</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="garlic vellulli ulli vellayulli">
-  <div class="item-left">
-    <div class="item-name">Garlic</div>
-    <div class="item-ml">വെള്ളുള്ളി</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹208/kg</span>
-    <span class="price-pill pill-yellow">₹229–270</span>
-    <span class="price-pill pill-red">↑300</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="lemon lime cherunaranga naranga">
-  <div class="item-left">
-    <div class="item-name">Lemon</div>
-    <div class="item-ml">ചെറുനാരങ്ങ</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹50/kg</span>
-    <span class="price-pill pill-yellow">₹55–65</span>
-    <span class="price-pill pill-red">↑80</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="amla gooseberry nellika">
-  <div class="item-left">
-    <div class="item-name">Amla (Gooseberry)</div>
-    <div class="item-ml">നെല്ലിക്ക</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹85/kg</span>
-    <span class="price-pill pill-yellow">₹94–111</span>
-    <span class="price-pill pill-red">↑130</span>
-  </div>
-</div>
-
-<!-- ════ MUSHROOM ════ -->
-<div class="section-head" data-section>Other</div>
-
-<div class="item-row" data-name="mushroom koon">
-  <div class="item-left">
-    <div class="item-name">Mushroom</div>
-    <div class="item-ml">കൂൺ</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹89/kg</span>
-    <span class="price-pill pill-yellow">₹98–116</span>
-    <span class="price-pill pill-red">↑140</span>
-  </div>
-</div>
-
-<div class="item-row" data-name="green peas matar peas">
-  <div class="item-left">
-    <div class="item-name">Green Peas</div>
-    <div class="item-ml">പട്ടാണി</div>
-  </div>
-  <div class="item-prices">
-    <span class="price-pill pill-green">₹65/kg</span>
-    <span class="price-pill pill-yellow">₹72–85</span>
-    <span class="price-pill pill-red">↑100</span>
-  </div>
-</div>
 
 <div id="empty">No items found. Try searching in English or Malayalam.</div>
 
@@ -905,7 +325,7 @@
 
 <!-- ── Sources ── -->
 <div class="sources">
-  <div class="sources-title">Sources (19 Sep 2026)</div>
+  <div class="sources-title">Sources</div>
   <p>
     Wholesale: <a href="https://www.vfpck.org/mwiseprice.asp?ID=9" target="_blank">VFPCK Kottayam</a> ·
     Retail range: <a href="https://market.todaypricerates.com/Kottayam-vegetables-price-in-Kerala" target="_blank">todaypricerates.com</a> ·
@@ -917,95 +337,100 @@
 </div>
 
 <script>
-  // ── Config ────────────────────────────────────────────────────────
-  // Paste your Google Apps Script web app URL here after deploying.
-  // See apps_script/Code.gs in the repo — deploy takes ~2 minutes.
   const API = 'https://pricewise-spots.loca.lt';
-  // Default header needed for localtunnel bypass page
   const API_HEADERS = { 'bypass-tunnel-reminder': 'true', 'Content-Type': 'application/json' };
-
   const QUALITY_LABELS = ['', 'Poor', 'Average', 'Good', 'Very Good', 'Fresh & Excellent'];
 
-  // ── Search ────────────────────────────────────────────────────────
-  const input = document.getElementById('search');
-  const allRows = document.querySelectorAll('.item-row');
-  const sections = document.querySelectorAll('[data-section]');
-  const empty = document.getElementById('empty');
+  const priceList = document.getElementById('price-list');
+  const emptyEl   = document.getElementById('empty');
+  const input     = document.getElementById('search');
 
-  function applySearch() {
-    const q = input.value.toLowerCase().trim();
-    let visibleCount = 0;
-    allRows.forEach(row => {
-      const name = row.dataset.name || '';
-      const text = row.textContent.toLowerCase();
-      const match = !q || name.includes(q) || text.includes(q);
-      row.classList.toggle('hidden', !match);
-      const bar = row.nextElementSibling;
-      if (bar && bar.classList.contains('spot-bar')) {
-        bar.classList.toggle('hidden', !match);
-      }
-      if (match) visibleCount++;
-    });
-    sections.forEach(sec => {
-      let next = sec.nextElementSibling;
-      let hasVisible = false;
-      while (next && !next.hasAttribute('data-section')) {
-        if (!next.classList.contains('hidden') && next.classList.contains('item-row')) {
-          hasVisible = true; break;
-        }
-        next = next.nextElementSibling;
-      }
-      sec.style.display = hasVisible ? '' : 'none';
-    });
-    empty.style.display = visibleCount === 0 ? 'block' : 'none';
+  // ── Render items from prices.json ────────────────────────────────
+  function pill(cls, text) {
+    return `<span class="price-pill ${cls}">${text}</span>`;
   }
-  input.addEventListener('input', applySearch);
+
+  function renderItems(data) {
+    // Update header timestamp
+    document.getElementById('updated-label').textContent =
+      `Updated: ${data.updated} · Wholesale + Retail data`;
+    // Update sources footer
+    const srcTitle = document.querySelector('.sources-title');
+    if (srcTitle) srcTitle.textContent = `Sources (${data.updated})`;
+
+    // Group by category
+    const groups = {};
+    data.items.forEach(item => {
+      if (!groups[item.category]) groups[item.category] = [];
+      groups[item.category].push(item);
+    });
+
+    const frag = document.createDocumentFragment();
+    Object.entries(groups).forEach(([cat, items]) => {
+      const head = document.createElement('div');
+      head.className = 'section-head';
+      head.setAttribute('data-section', '');
+      head.textContent = cat;
+      frag.appendChild(head);
+
+      items.forEach(item => {
+        const unitLabel = item.unit === 'kg' ? '/kg'
+                        : item.unit === 'piece' ? '/pc'
+                        : `/${item.unit}`;
+        const row = document.createElement('div');
+        row.className = 'item-row';
+        row.dataset.name = item.keywords;
+        row.innerHTML = `
+          <div class="item-left">
+            <div class="item-name">${item.name}</div>
+            <div class="item-ml">${item.malayalam}</div>
+            ${item.note ? `<div class="item-note">${item.note}</div>` : ''}
+          </div>
+          <div class="item-prices">
+            ${pill('pill-green', `₹${item.wholesale}${unitLabel}`)}
+            ${pill('pill-yellow', `₹${item.retail_low}–${item.retail_high}`)}
+            ${pill('pill-red', `↑${item.avoid_above}`)}
+          </div>`;
+        frag.appendChild(row);
+      });
+    });
+
+    priceList.appendChild(frag);
+    initSearch();
+    loadSpots();
+  }
+
+  // ── Search ────────────────────────────────────────────────────────
+  function initSearch() {
+    const allRows = priceList.querySelectorAll('.item-row');
+    const sections = priceList.querySelectorAll('[data-section]');
+
+    function applySearch() {
+      const q = input.value.toLowerCase().trim();
+      let visible = 0;
+      allRows.forEach(row => {
+        const match = !q || (row.dataset.name || '').includes(q) ||
+                      row.textContent.toLowerCase().includes(q);
+        row.classList.toggle('hidden', !match);
+        const bar = row.nextElementSibling;
+        if (bar && bar.classList.contains('spot-bar')) bar.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+      sections.forEach(sec => {
+        let next = sec.nextElementSibling;
+        let has = false;
+        while (next && !next.hasAttribute('data-section')) {
+          if (!next.classList.contains('hidden') && next.classList.contains('item-row')) { has = true; break; }
+          next = next.nextElementSibling;
+        }
+        sec.style.display = has ? '' : 'none';
+      });
+      emptyEl.style.display = visible === 0 ? 'block' : 'none';
+    }
+    input.addEventListener('input', applySearch);
+  }
 
   // ── Community Spots ───────────────────────────────────────────────
-  function insertSpotBars(spots) {
-    // Group spots by item (lowercase)
-    const byItem = {};
-    spots.forEach(s => {
-      const key = (s.Item || '').toLowerCase();
-      if (!byItem[key]) byItem[key] = [];
-      byItem[key].push(s);
-    });
-
-    allRows.forEach(row => {
-      const names = (row.dataset.name || '').split(' ');
-      // Find matching spots — any keyword overlap
-      let matched = [];
-      Object.entries(byItem).forEach(([itemKey, entries]) => {
-        if (names.some(n => n.length > 2 && itemKey.includes(n))) {
-          matched = matched.concat(entries);
-        }
-      });
-      if (!matched.length) return;
-
-      // Sort by price ascending, keep top 3
-      matched.sort((a, b) => parseFloat(a.Price || 0) - parseFloat(b.Price || 0));
-      const top = matched.slice(0, 3);
-
-      const bar = document.createElement('div');
-      bar.className = 'spot-bar';
-      bar.innerHTML = top.map(s => {
-        const stars = s.Quality ? '⭐'.repeat(Math.min(5, parseInt(s.Quality) || 0)) : '';
-        const ago = s.Date ? timeAgo(s.Date) : '';
-        const loc = [s.Shop, s.Location].filter(Boolean).join(', ');
-        return `<span class="spot-entry">
-          <span class="spot-pin">📍</span>
-          <span class="spot-price">₹${s.Price}${s.Unit ? ' ' + s.Unit : ''}</span>
-          <span class="spot-shop">${loc}</span>
-          ${stars ? `<span class="spot-quality">${stars}</span>` : ''}
-          ${s.Reporter && s.Reporter !== 'Anonymous' ? `<span class="spot-shop">· ${s.Reporter}</span>` : ''}
-          ${ago ? `<span class="spot-shop">· ${ago}</span>` : ''}
-        </span>`;
-      }).join('');
-
-      row.insertAdjacentElement('afterend', bar);
-    });
-  }
-
   function timeAgo(dateStr) {
     const d = new Date(dateStr);
     if (isNaN(d)) return '';
@@ -1016,12 +441,56 @@
     return dateStr;
   }
 
-  if (API) {
+  function insertSpotBars(spots) {
+    const byItem = {};
+    spots.forEach(s => {
+      const key = (s.Item || '').toLowerCase();
+      if (!byItem[key]) byItem[key] = [];
+      byItem[key].push(s);
+    });
+    priceList.querySelectorAll('.item-row').forEach(row => {
+      const names = (row.dataset.name || '').split(' ');
+      let matched = [];
+      Object.entries(byItem).forEach(([k, entries]) => {
+        if (names.some(n => n.length > 2 && k.includes(n))) matched = matched.concat(entries);
+      });
+      if (!matched.length) return;
+      matched.sort((a, b) => parseFloat(a.Price || 0) - parseFloat(b.Price || 0));
+      const bar = document.createElement('div');
+      bar.className = 'spot-bar';
+      bar.innerHTML = matched.slice(0, 3).map(s => {
+        const stars = s.Quality ? '⭐'.repeat(Math.min(5, parseInt(s.Quality) || 0)) : '';
+        const ago   = s.Date ? timeAgo(s.Date) : '';
+        const loc   = [s.Shop, s.Location].filter(Boolean).join(', ');
+        return `<span class="spot-entry">
+          <span class="spot-pin">📍</span>
+          <span class="spot-price">₹${s.Price}${s.Unit ? ' ' + s.Unit : ''}</span>
+          <span class="spot-shop">${loc}</span>
+          ${stars ? `<span class="spot-quality">${stars}</span>` : ''}
+          ${s.Reporter && s.Reporter !== 'Anonymous' ? `<span class="spot-shop">· ${s.Reporter}</span>` : ''}
+          ${ago ? `<span class="spot-shop">· ${ago}</span>` : ''}
+        </span>`;
+      }).join('');
+      row.insertAdjacentElement('afterend', bar);
+    });
+  }
+
+  function loadSpots() {
+    if (!API) return;
     fetch(API + '/spots', { headers: API_HEADERS })
       .then(r => r.ok ? r.json() : [])
       .then(spots => { if (spots.length) insertSpotBars(spots); })
       .catch(() => {});
   }
+
+  // ── Boot: load prices.json ────────────────────────────────────────
+  fetch('prices.json?' + Date.now())
+    .then(r => r.json())
+    .then(data => renderItems(data))
+    .catch(() => {
+      document.getElementById('updated-label').textContent = 'Could not load prices';
+      emptyEl.style.display = 'block';
+    });
 
   // ── Modal ─────────────────────────────────────────────────────────
   const modalBg = document.getElementById('modal-bg');
@@ -1030,7 +499,6 @@
   let selectedQuality = 0;
 
   fab.addEventListener('click', () => {
-    // Pre-fill item if search has a value
     const q = input.value.trim();
     if (q) document.getElementById('f-item').value = q;
     modalBg.classList.add('open');

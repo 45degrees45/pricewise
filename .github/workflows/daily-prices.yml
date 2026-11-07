@@ -1,0 +1,42 @@
+name: Daily Price Update
+
+on:
+  schedule:
+    # 7:00 AM IST = 01:30 UTC
+    - cron: '30 1 * * *'
+  workflow_dispatch:  # lets you run it manually from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update-prices:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 lxml
+
+      - name: Fetch latest prices
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}
+        run: python fetch_prices.py
+
+      - name: Commit and push if prices changed
+        run: |
+          git config user.name  "PriceWise Bot"
+          git config user.email "bot@pricewise.local"
+          git add docs/prices.json
+          if git diff --cached --quiet; then
+            echo "No price changes today."
+          else
+            git commit -m "prices: auto-update $(date -u +%Y-%m-%d)"
+            git push
+          fi

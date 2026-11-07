@@ -27,13 +27,14 @@ jobs:
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}
+          NOTION_CHANGELOG_PAGE_ID: ${{ secrets.NOTION_CHANGELOG_PAGE_ID }}
         run: python fetch_prices.py
 
       - name: Commit and push if prices changed
         run: |
           git config user.name  "PriceWise Bot"
           git config user.email "bot@pricewise.local"
-          git add docs/prices.json
+          git add docs/prices.json docs/price_history.json
           if git diff --cached --quiet; then
             echo "No price changes today."
           else

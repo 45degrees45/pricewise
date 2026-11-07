@@ -233,6 +233,11 @@ def _item_to_notion_props(item: dict, updated_iso: str) -> dict:
 
 
 NOTION_DB_ID_DEFAULT = "ac7daa2b5c46461ca0e075939742db1b"
+NOTION_CHANGELOG_PAGE_ID = os.environ.get(
+    "NOTION_CHANGELOG_PAGE_ID", "411764cab288815ab750dbf64941e381"
+)
+HISTORY_JSON = Path("docs/price_history.json")
+CHANGE_THRESHOLD_PCT = 5  # alert/highlight changes above this %
 
 
 def sync_to_notion(data: dict) -> None:
@@ -299,47 +304,155 @@ def sync_to_notion(data: dict) -> None:
     print(f"Notion: updated={updated} created={created} failed={failed}")
 
 
+def append_notion_changelog(date_str: str, movers: list[dict]) -> None:
+    """Prepend a dated change block to the Notion changelog page."""
+    token = os.environ.get("NOTION_TOKEN")
+    page_id = NOTION_CHANGELOG_PAGE_ID
+    if not token or not page_id:
+        print("Notion changelog: NOTION_TOKEN or NOTION_CHANGELOG_PAGE_ID not set — skipping")
+        return
+
+    hdr = _notion_headers()
+    if not movers:
+        summary = "No significant price changes today."
+    else:
+        lines = []
+        for m in movers:
+            arrow = "⬆️" if m["change_pct"] > 0 else "⬇️"
+            lines.append(
+                f"{arrow} **{m['name']}**: ₹{m['prev']} → ₹{m['now']} "
+                f"({m['change_pct']:+.1f}%)"
+            )
+        summary = "\n".join(lines)
+
+    children = [
+        {
+            "object": "block",
+            "type": "heading_2",
+            "heading_2": {"rich_text": [{"type": "text", "text": {"content": date_str}}]},
+        },
+        {
+            "object": "block",
+            "type": "paragraph",
+            "paragraph": {
+                "rich_text": [{"type": "text", "text": {"content": summary}}]
+            },
+        },
+        {"object": "block", "type": "divider", "divider": {}},
+    ]
+
+    try:
+        # Prepend by getting current children first, then rebuilding
+        # Simpler: just append (Notion doesn't support prepend via API)
+        r = requests.patch(
+            f"https://api.notion.com/v1/blocks/{page_id}/children",
+            headers=hdr,
+            json={"children": children},
+            timeout=30,
+        )
+        r.raise_for_status()
+        print(f"Notion changelog: appended {len(movers)} movers for {date_str}")
+    except Exception as e:
+        print(f"Notion changelog append failed: {e}")
+
+
+# ── History tracking ──────────────────────────────────────────────────────────
+
+def load_history() -> list[dict]:
+    if HISTORY_JSON.exists():
+        try:
+            return json.loads(HISTORY_JSON.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return []
+
+
+def append_history(date_str: str, item_map: dict) -> None:
+    history = load_history()
+    snapshot = {
+        "date": date_str,
+        "prices": {iid: item["wholesale"] for iid, item in item_map.items()},
+    }
+    # Avoid duplicate date entries
+    history = [h for h in history if h["date"] != date_str]
+    history.append(snapshot)
+    # Keep last 365 days
+    history = history[-365:]
+    HISTORY_JSON.write_text(json.dumps(history, ensure_ascii=False, separators=(",", ":")),
+                            encoding="utf-8")
+    print(f"History: saved snapshot for {date_str} ({len(snapshot['prices'])} items)")
+
+
+def compute_changes(item_map: dict) -> list[dict]:
+    """Return items whose wholesale price changed by >= CHANGE_THRESHOLD_PCT."""
+    movers = []
+    for item in item_map.values():
+        prev = item.get("prev_wholesale")
+        now  = item["wholesale"]
+        if prev and prev != now:
+            pct = (now - prev) / prev * 100
+            item["change_pct"] = round(pct, 1)
+            item["trend"] = "up" if pct > 0 else "down"
+            if abs(pct) >= CHANGE_THRESHOLD_PCT:
+                movers.append({
+                    "name": item["name"],
+                    "prev": prev,
+                    "now":  now,
+                    "change_pct": round(pct, 1),
+                })
+        else:
+            item["change_pct"] = 0.0
+            item["trend"] = "same"
+    movers.sort(key=lambda m: abs(m["change_pct"]), reverse=True)
+    return movers
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main() -> int:
     data = json.loads(PRICES_JSON.read_text(encoding="utf-8"))
     item_map = {item["id"]: item for item in data["items"]}
 
+    # Save today's prices as "prev" before overwriting
+    for item in item_map.values():
+        item["prev_wholesale"] = item["wholesale"]
+
     print("Scraping prices…")
     wholesale = scrape_vfpck()
-    retail = scrape_todaypricerates()
-    fallback = scrape_vegetablemarketprice()
+    retail    = scrape_todaypricerates()
+    fallback  = scrape_vegetablemarketprice()
 
-    changed = 0
     sources_hit: list[str] = []
 
     for item_id, item in item_map.items():
-        prev = (item["wholesale"], item["retail_low"], item["retail_high"])
-
         if item_id in wholesale:
             item["wholesale"] = round(wholesale[item_id])
             sources_hit.append("VFPCK")
 
         retail_price = retail.get(item_id) or fallback.get(item_id)
         if retail_price:
-            item["retail_low"]   = round(retail_price * 1.05)
-            item["retail_high"]  = round(retail_price * 1.25)
-            item["avoid_above"]  = round(retail_price * 1.55)
-            src = "todaypricerates" if item_id in retail else "vegetablemarketprice"
-            sources_hit.append(src)
-
-        if (item["wholesale"], item["retail_low"], item["retail_high"]) != prev:
-            changed += 1
+            item["retail_low"]  = round(retail_price * 1.05)
+            item["retail_high"] = round(retail_price * 1.25)
+            item["avoid_above"] = round(retail_price * 1.55)
+            sources_hit.append("todaypricerates" if item_id in retail else "vegetablemarketprice")
 
     now = datetime.now(IST)
+    date_str = now.strftime("%Y-%m-%d")
     data["updated"]     = now.strftime("%-d %b %Y")
     data["updated_iso"] = now.isoformat()
     data["sources"]     = sorted(set(sources_hit)) if sources_hit else data["sources"]
 
-    PRICES_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Saved {PRICES_JSON}  ({changed} items updated)")
+    movers = compute_changes(item_map)
+    print(f"Significant movers (≥{CHANGE_THRESHOLD_PCT}%): {len(movers)}")
+    for m in movers:
+        print(f"  {m['name']}: ₹{m['prev']} → ₹{m['now']} ({m['change_pct']:+.1f}%)")
 
+    PRICES_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Saved {PRICES_JSON}")
+
+    append_history(date_str, item_map)
     sync_to_notion(data)
+    append_notion_changelog(data["updated"], movers)
     return 0
 
 

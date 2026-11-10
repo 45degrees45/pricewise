@@ -168,6 +168,21 @@
     .trend-down { color: var(--green); }
     .trend-same { color: var(--muted); }
 
+    .card-meta {
+      margin-top: 9px; padding-top: 9px;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 4px;
+    }
+    .card-location {
+      font-size: 10.5px; color: var(--muted);
+      display: flex; align-items: center; gap: 3px;
+    }
+    .card-date {
+      font-size: 10.5px; color: var(--muted);
+    }
+
     /* ── Empty ── */
     #empty {
       display: none; grid-column: 1/-1;
@@ -408,6 +423,13 @@
   let allCards = [];
   let activeFilter = 'all';
 
+  function fmtDate(iso) {
+    if (!iso) return '';
+    const [y, m, d] = iso.split('-');
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${parseInt(d)} ${months[parseInt(m)-1]}`;
+  }
+
   function renderItems(data) {
     document.getElementById('updated-label').textContent = `Updated ${data.updated}`;
     document.getElementById('sources-title').textContent = `Sources (${data.updated})`;
@@ -462,7 +484,11 @@
             <span class="tag tag-yellow">₹${item.retail_low}–${item.retail_high}</span>
             <span class="tag tag-red">↑${item.avoid_above}</span>
           </div>
-          ${trendHtml}`;
+          ${trendHtml}
+          <div class="card-meta">
+            <span class="card-location">📍 Kottayam</span>
+            <span class="card-date">${fmtDate(data.updated)}</span>
+          </div>`;
         frag.appendChild(card);
         allCards.push(card);
       });

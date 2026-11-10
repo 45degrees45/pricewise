@@ -7,186 +7,423 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #0f172a;
-      --card: #1e293b;
-      --border: #334155;
-      --text: #f1f5f9;
-      --muted: #94a3b8;
-      --green: #22c55e;
-      --yellow: #eab308;
-      --red: #ef4444;
-      --blue: #38bdf8;
-      --accent: #10b981;
+      --bg: #f0f4f1;
+      --card: #ffffff;
+      --border: #e2e8e4;
+      --text: #1a2e1f;
+      --muted: #6b7a70;
+      --green: #2d8a56;
+      --green-light: #e8f5ed;
+      --yellow: #c17c1a;
+      --yellow-light: #fef9e7;
+      --red: #c0392b;
+      --red-light: #fdecea;
+      --accent: #1a7a45;
+      --accent-light: #d4edda;
     }
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       min-height: 100vh;
     }
 
     /* ── Header ── */
     .header {
-      background: linear-gradient(135deg, #064e3b, #0d9488);
-      padding: 20px 16px 16px;
+      background: linear-gradient(135deg, #064e3b 0%, #0d9488 100%);
+      padding: 16px 16px 14px;
       position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
     }
     .header-top {
       display: flex; justify-content: space-between; align-items: flex-start;
       margin-bottom: 12px;
     }
-    .header h1 { font-size: 1.2rem; font-weight: 800; }
-    .header h1 span { color: #6ee7b7; }
-    .updated { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 2px; }
-    .back-link {
-      font-size: 12px; color: rgba(255,255,255,0.7);
-      text-decoration: none; white-space: nowrap; padding-top: 2px;
+    .logo { display: flex; align-items: center; gap: 8px; }
+    .logo-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
     }
-    .back-link:hover { color: white; }
+    .logo-text h1 { font-size: 1.1rem; font-weight: 800; color: white; }
+    .logo-text .sub { font-size: 11px; color: rgba(255,255,255,0.65); margin-top: 1px; }
+    .back-link {
+      font-size: 12px; color: rgba(255,255,255,0.75);
+      text-decoration: none; padding-top: 2px; white-space: nowrap;
+    }
 
-    /* ── Search ── */
     .search-wrap { position: relative; }
     .search-wrap svg {
       position: absolute; left: 12px; top: 50%;
-      transform: translateY(-50%); opacity: 0.5;
-      pointer-events: none;
+      transform: translateY(-50%); opacity: 0.55; pointer-events: none;
     }
     #search {
-      width: 100%; padding: 11px 12px 11px 38px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 10px; color: white; font-size: 15px;
-      outline: none;
+      width: 100%; padding: 10px 12px 10px 38px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 10px; color: white; font-size: 15px; outline: none;
     }
     #search::placeholder { color: rgba(255,255,255,0.45); }
-    #search:focus { background: rgba(255,255,255,0.18); border-color: var(--accent); }
+    #search:focus { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.5); }
 
-    /* ── Legend ── */
+    /* ── Category filters ── */
+    .filters {
+      display: flex; gap: 8px; padding: 10px 12px;
+      overflow-x: auto; white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .filters::-webkit-scrollbar { display: none; }
+    .filter-chip {
+      padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+      border: 1.5px solid var(--border); background: white; color: var(--muted);
+      cursor: pointer; transition: all .15s; flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .filter-chip.active {
+      background: var(--accent); border-color: var(--accent); color: white;
+    }
+
+    /* ── Legend bar ── */
     .legend {
-      display: flex; gap: 14px; padding: 10px 16px;
-      font-size: 11px; color: var(--muted);
-      border-bottom: 1px solid var(--border);
+      display: flex; gap: 12px; padding: 6px 12px 10px;
+      font-size: 10.5px; color: var(--muted);
       overflow-x: auto; white-space: nowrap;
     }
     .leg { display: flex; align-items: center; gap: 5px; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .ldot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
-    /* ── Section headers ── */
-    .section-head {
-      padding: 12px 16px 6px;
-      font-size: 10px; font-weight: 700; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--accent);
-    }
-
-    /* ── Price rows ── */
-    .item-row {
-      display: flex; align-items: center;
-      padding: 11px 16px;
-      border-bottom: 1px solid var(--border);
+    /* ── Card grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 10px;
+      padding: 0 10px 100px;
     }
-    .item-row:hover { background: var(--card); }
-    .item-row.hidden { display: none; }
-
-    .item-left { flex: 1; min-width: 0; }
-    .item-name { font-size: 14px; font-weight: 600; }
-    .item-ml { font-size: 11px; color: var(--muted); margin-top: 1px; }
-
-    .item-prices {
-      display: flex; gap: 6px; align-items: center; flex-shrink: 0;
+    @media (min-width: 480px) {
+      .grid { grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 12px; padding: 0 12px 100px; }
     }
-    .price-pill {
-      font-size: 12px; font-weight: 700;
-      padding: 4px 9px; border-radius: 100px;
-      white-space: nowrap;
-    }
-    .pill-green  { background: rgba(34,197,94,0.15);  color: #4ade80; }
-    .pill-yellow { background: rgba(234,179,8,0.15);  color: #fde047; }
-    .pill-red    { background: rgba(239,68,68,0.15);  color: #f87171; }
-
-    .item-note {
-      font-size: 10px; color: var(--muted); margin-top: 3px;
+    @media (min-width: 768px) {
+      .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; padding: 0 16px 100px; }
     }
 
-    /* ── Trend badge ── */
-    .trend-up   { font-size: 11px; color: #f87171; font-weight: 700; flex-shrink: 0; }
-    .trend-down { font-size: 11px; color: #4ade80; font-weight: 700; flex-shrink: 0; }
+    /* ── Section label ── */
+    .section-label {
+      grid-column: 1 / -1;
+      font-size: 10px; font-weight: 700; letter-spacing: 1.8px;
+      text-transform: uppercase; color: var(--accent);
+      padding: 8px 2px 2px;
+    }
 
-    /* ── Sources footer ── */
+    /* ── Price card ── */
+    .price-card {
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 14px 12px 12px;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center;
+      transition: transform .15s, box-shadow .15s;
+      cursor: default;
+    }
+    .price-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    .price-card.hidden { display: none; }
+
+    .card-img {
+      width: 70px; height: 70px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 34px; margin-bottom: 10px; flex-shrink: 0;
+    }
+
+    .card-name { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.25; }
+    .card-ml   { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.3; }
+
+    .card-price {
+      margin-top: 10px;
+      font-size: 22px; font-weight: 800; color: var(--green);
+      line-height: 1;
+    }
+    .card-unit { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    .card-range {
+      margin-top: 7px;
+      display: flex; gap: 4px; align-items: center; flex-wrap: wrap;
+      justify-content: center;
+    }
+    .tag {
+      font-size: 10.5px; font-weight: 600;
+      padding: 3px 8px; border-radius: 20px;
+    }
+    .tag-yellow { background: var(--yellow-light); color: var(--yellow); }
+    .tag-red    { background: var(--red-light);    color: var(--red); }
+
+    .card-trend {
+      margin-top: 7px; font-size: 11px; font-weight: 700;
+    }
+    .trend-up   { color: var(--red); }
+    .trend-down { color: var(--green); }
+    .trend-same { color: var(--muted); }
+
+    /* ── Empty ── */
+    #empty {
+      display: none; grid-column: 1/-1;
+      padding: 48px 16px; text-align: center; color: var(--muted); font-size: 15px;
+    }
+
+    /* ── Sources ── */
     .sources {
-      padding: 20px 16px 32px;
-      font-size: 11px; color: var(--muted);
-      border-top: 1px solid var(--border);
+      padding: 20px 14px 32px; font-size: 11px; color: var(--muted);
+      border-top: 1px solid var(--border); margin: 0 10px;
     }
     .sources a { color: var(--accent); text-decoration: none; }
     .sources a:hover { text-decoration: underline; }
-    .sources-title { font-weight: 700; margin-bottom: 8px; font-size: 12px; color: var(--text); }
+    .sources-title { font-weight: 700; margin-bottom: 6px; font-size: 12px; color: var(--text); }
 
-    /* ── Empty state ── */
-    #empty { display: none; padding: 40px 16px; text-align: center; color: var(--muted); }
+    /* ── FAB ── */
+    .report-fab {
+      position: fixed; bottom: 20px; right: 16px; z-index: 200;
+      background: var(--accent); color: white;
+      border: none; border-radius: 50px;
+      padding: 13px 20px; font-size: 14px; font-weight: 700;
+      box-shadow: 0 4px 18px rgba(26,122,69,0.4);
+      cursor: pointer; display: flex; align-items: center; gap: 7px;
+      transition: transform .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .report-fab:active { transform: scale(.96); }
 
-    /* ── You bought badge (private — not shown on public page) ── */
-    .you-bought { display: none; }
+    /* ── Report panel ── */
+    .report-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(2px);
+    }
+    .report-overlay.open { display: block; }
+    .report-panel {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 400;
+      background: white; border-radius: 20px 20px 0 0;
+      padding: 20px 16px 32px;
+      transform: translateY(100%); transition: transform .25s ease;
+      max-height: 90vh; overflow-y: auto;
+    }
+    .report-panel.open { transform: translateY(0); }
+    .panel-drag {
+      width: 40px; height: 4px; background: #e0e0e0; border-radius: 4px;
+      margin: 0 auto 16px;
+    }
+    .report-panel h2 { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .report-panel p  { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+    .rform-row { display: flex; gap: 10px; margin-bottom: 10px; }
+    .rfield { flex: 1; }
+    .rfield label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 4px; font-weight: 600; }
+    .rfield input, .rfield select {
+      width: 100%; padding: 10px 12px;
+      background: #f8fafb; border: 1.5px solid var(--border);
+      border-radius: 9px; color: var(--text); font-size: 14px; outline: none;
+    }
+    .rfield input:focus, .rfield select:focus { border-color: var(--accent); background: white; }
+    #report-submit {
+      width: 100%; margin-top: 6px;
+      padding: 13px; background: var(--accent);
+      border: none; border-radius: 11px;
+      color: white; font-size: 15px; font-weight: 700; cursor: pointer;
+    }
+    #report-submit:disabled { opacity: .6; cursor: default; }
+    #report-msg { font-size: 13px; text-align: center; margin-top: 10px; min-height: 18px; }
   </style>
 </head>
 <body>
 
 <header class="header">
   <div class="header-top">
-    <div>
-      <h1>🛒 Kottayam <span>Price Guide</span></h1>
-      <div class="updated" id="updated-label">Loading prices…</div>
+    <div class="logo">
+      <div class="logo-icon">🛒</div>
+      <div class="logo-text">
+        <h1>Kottayam Prices</h1>
+        <div class="sub" id="updated-label">Loading…</div>
+      </div>
     </div>
-    <a href="index.html" class="back-link">← PriceWise</a>
+    <a href="index.html" class="back-link">PriceWise ↗</a>
   </div>
   <div class="search-wrap">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="search" placeholder="Search item or Malayalam name…" autocomplete="off">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="search" placeholder="Search vegetables, fish…" autocomplete="off" spellcheck="false">
   </div>
 </header>
 
-<div class="legend">
-  <span class="leg"><span class="dot" style="background:var(--green)"></span> Wholesale / best price</span>
-  <span class="leg"><span class="dot" style="background:var(--yellow)"></span> Fair retail range</span>
-  <span class="leg"><span class="dot" style="background:var(--red)"></span> Avoid paying above</span>
+<div class="filters" id="filters">
+  <button class="filter-chip active" data-cat="all">All</button>
 </div>
 
-<!-- ── Dynamic price list (populated by JS from prices.json) ── -->
-<div id="price-list"></div>
+<div class="legend">
+  <span class="leg"><span class="ldot" style="background:#2d8a56"></span>Wholesale</span>
+  <span class="leg"><span class="ldot" style="background:#c17c1a"></span>Retail range</span>
+  <span class="leg"><span class="ldot" style="background:#c0392b"></span>Avoid above</span>
+</div>
 
-<!-- items rendered dynamically by JS below -->
+<div class="grid" id="price-list">
+  <div id="empty">No items found.</div>
+</div>
 
-
-<div id="empty">No items found. Try searching in English or Malayalam.</div>
-
-<!-- ── Sources ── -->
-<div class="sources">
-  <div class="sources-title">Sources</div>
+<div class="sources" id="sources-footer" style="display:none">
+  <div class="sources-title" id="sources-title">Sources</div>
   <p>
     Wholesale: <a href="https://www.vfpck.org/mwiseprice.asp?ID=9" target="_blank">VFPCK Kottayam</a> ·
-    Retail range: <a href="https://market.todaypricerates.com/Kottayam-vegetables-price-in-Kerala" target="_blank">todaypricerates.com</a> ·
+    Retail: <a href="https://market.todaypricerates.com/Kottayam-vegetables-price-in-Kerala" target="_blank">todaypricerates.com</a> ·
     <a href="https://vegetablemarketprice.com/market/kerala/today" target="_blank">vegetablemarketprice.com</a> ·
-    Kerala specials: <a href="https://findfresh.in" target="_blank">FindFresh</a> ·
-    <a href="https://rozkabhav.com/vegetables-price-in-thiruvananthapuram-kerala/" target="_blank">rozkabhav.com</a>
+    <a href="https://findfresh.in" target="_blank">FindFresh</a>
   </p>
-  <p style="margin-top:8px;">Retail prices vary by market and vendor. Use these as a negotiation guide.</p>
+  <p style="margin-top:6px;">Retail prices vary by vendor. Use as a negotiation guide.</p>
+</div>
+
+<button class="report-fab" id="report-fab-btn">＋ Report a Price</button>
+<div class="report-overlay" id="report-overlay"></div>
+<div class="report-panel" id="report-panel">
+  <div class="panel-drag"></div>
+  <h2>Report a Price</h2>
+  <p>Help your community — share what you paid today.</p>
+  <form id="report-form" autocomplete="off">
+    <div class="rform-row">
+      <div class="rfield" style="flex:2">
+        <label>Item *</label>
+        <input id="r-item" list="item-suggestions" placeholder="e.g. Tomato" required>
+        <datalist id="item-suggestions"></datalist>
+      </div>
+      <div class="rfield">
+        <label>Price ₹ *</label>
+        <input id="r-price" type="number" min="0" step="0.5" placeholder="40" required>
+      </div>
+    </div>
+    <div class="rform-row">
+      <div class="rfield">
+        <label>Unit</label>
+        <select id="r-unit">
+          <option>per kg</option><option>per piece</option>
+          <option>per 500g</option><option>per 250g</option>
+          <option>per 100g</option><option>per bunch</option>
+        </select>
+      </div>
+      <div class="rfield" style="flex:2">
+        <label>Shop</label>
+        <input id="r-shop" placeholder="e.g. KK Market">
+      </div>
+    </div>
+    <div class="rform-row">
+      <div class="rfield">
+        <label>Location</label>
+        <input id="r-location" placeholder="e.g. Kottayam">
+      </div>
+      <div class="rfield">
+        <label>Your name</label>
+        <input id="r-reporter" placeholder="Anonymous">
+      </div>
+    </div>
+    <button type="submit" id="report-submit">Submit Price</button>
+    <div id="report-msg"></div>
+  </form>
 </div>
 
 <script>
-  const priceList = document.getElementById('price-list');
-  const emptyEl   = document.getElementById('empty');
-  const input     = document.getElementById('search');
+  // ── Emoji + colour per item ──────────────────────────────────────
+  const ITEM_META = {
+    tomato:          { emoji: '🍅', bg: '#fde8e8' },
+    onion_big:       { emoji: '🧅', bg: '#fef3e2' },
+    shallot:         { emoji: '🧅', bg: '#fef3e2' },
+    potato:          { emoji: '🥔', bg: '#fef9e7' },
+    green_chilli:    { emoji: '🌶️', bg: '#e8fde8' },
+    cucumber:        { emoji: '🥒', bg: '#e8f8e8' },
+    ladies_finger:   { emoji: '🫛', bg: '#e8f8e8' },
+    brinjal:         { emoji: '🍆', bg: '#f3e8ff' },
+    brinjal_big:     { emoji: '🍆', bg: '#f3e8ff' },
+    bitter_gourd:    { emoji: '🥒', bg: '#e8f8e8' },
+    snake_gourd:     { emoji: '🥒', bg: '#e8f8e8' },
+    bottle_gourd:    { emoji: '🥒', bg: '#e8f8e8' },
+    ash_gourd:       { emoji: '🎃', bg: '#fef3e2' },
+    ridge_gourd:     { emoji: '🥒', bg: '#e8f8e8' },
+    pumpkin:         { emoji: '🎃', bg: '#fef3e2' },
+    cabbage:         { emoji: '🥬', bg: '#e8f8e8' },
+    cauliflower:     { emoji: '🥦', bg: '#f0f8f0' },
+    carrot:          { emoji: '🥕', bg: '#fef3e2' },
+    beetroot:        { emoji: '🫐', bg: '#f5e8f8' },
+    capsicum:        { emoji: '🫑', bg: '#e8f8e8' },
+    french_beans:    { emoji: '🫘', bg: '#e8f8e8' },
+    drumstick:       { emoji: '🌿', bg: '#e8f8e8' },
+    ivy_gourd:       { emoji: '🥒', bg: '#e8f8e8' },
+    kadachakka:      { emoji: '🌰', bg: '#f9f4ec' },
+    coconut:         { emoji: '🥥', bg: '#f0faf5' },
+    tapioca:         { emoji: '🍠', bg: '#f9f4ec' },
+    koorkka:         { emoji: '🥔', bg: '#fef9e7' },
+    elephant_yam:    { emoji: '🍠', bg: '#f9f4ec' },
+    colocasia:       { emoji: '🍠', bg: '#f9f4ec' },
+    sweet_potato:    { emoji: '🍠', bg: '#fef3e2' },
+    raw_mango:       { emoji: '🥭', bg: '#fefde7' },
+    raw_banana:      { emoji: '🍌', bg: '#fefde7' },
+    banana_flower:   { emoji: '🌸', bg: '#fde8f5' },
+    cowpea:          { emoji: '🫘', bg: '#e8f8e8' },
+    kudampuli:       { emoji: '🍊', bg: '#fef3e2' },
+    karikku:         { emoji: '🥥', bg: '#f0faf5' },
+    spinach:         { emoji: '🥬', bg: '#e8f8e8' },
+    curry_leaves:    { emoji: '🌿', bg: '#e8f8e8' },
+    coriander:       { emoji: '🌿', bg: '#e8f8e8' },
+    mint:            { emoji: '🌿', bg: '#e8f8e8' },
+    colocasia_leaves:{ emoji: '🌿', bg: '#e8f8e8' },
+    ginger:          { emoji: '🫚', bg: '#fef9e7' },
+    garlic:          { emoji: '🧄', bg: '#f9f9f9' },
+    lemon:           { emoji: '🍋', bg: '#fefde7' },
+    amla:            { emoji: '🫒', bg: '#e8f5ed' },
+    mushroom:        { emoji: '🍄', bg: '#f5f0ec' },
+    green_peas:      { emoji: '🫛', bg: '#e8f8e8' },
+  };
 
-  function pill(cls, text) {
-    return `<span class="price-pill ${cls}">${text}</span>`;
+  const CAT_COLORS = {
+    'Daily Vegetables': '#e8f5ed',
+    'Kerala Specials':  '#fef9e7',
+    'Leafy Greens':     '#e8f8e8',
+    'Spices & Staples': '#fef3e2',
+    'Other':            '#f5f0f5',
+    'Default':          '#f0f4f1',
+  };
+
+  function getMeta(id) {
+    const key = id.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    return ITEM_META[key] || { emoji: '🥬', bg: '#e8f5ed' };
   }
 
-  function renderItems(data) {
-    document.getElementById('updated-label').textContent =
-      `Updated: ${data.updated} · Wholesale + Retail data`;
-    document.querySelector('.sources-title').textContent = `Sources (${data.updated})`;
+  function getCatColor(cat) {
+    for (const [k, v] of Object.entries(CAT_COLORS)) {
+      if (cat.toLowerCase().includes(k.toLowerCase().split(' ')[0].toLowerCase())) return v;
+    }
+    return CAT_COLORS['Default'];
+  }
 
+  // ── Render ───────────────────────────────────────────────────────
+  const grid     = document.getElementById('price-list');
+  const emptyEl  = document.getElementById('empty');
+  const searchEl = document.getElementById('search');
+  const filtersEl= document.getElementById('filters');
+
+  let allCards = [];
+  let activeFilter = 'all';
+
+  function renderItems(data) {
+    document.getElementById('updated-label').textContent = `Updated ${data.updated}`;
+    document.getElementById('sources-title').textContent = `Sources (${data.updated})`;
+    document.getElementById('sources-footer').style.display = '';
+
+    // Build category list
+    const cats = [...new Set(data.items.map(i => i.category))];
+    cats.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-chip';
+      btn.dataset.cat = cat;
+      btn.textContent = cat;
+      filtersEl.appendChild(btn);
+    });
+
+    // Group by category
     const groups = {};
     data.items.forEach(item => {
       if (!groups[item.category]) groups[item.category] = [];
@@ -195,71 +432,146 @@
 
     const frag = document.createDocumentFragment();
     Object.entries(groups).forEach(([cat, items]) => {
-      const head = document.createElement('div');
-      head.className = 'section-head';
-      head.setAttribute('data-section', '');
-      head.textContent = cat;
-      frag.appendChild(head);
+      const label = document.createElement('div');
+      label.className = 'section-label';
+      label.dataset.sectionFor = cat;
+      label.textContent = cat;
+      frag.appendChild(label);
 
       items.forEach(item => {
+        const meta = getMeta(item.id);
         const u = item.unit === 'kg' ? '/kg' : item.unit === 'piece' ? '/pc' : `/${item.unit}`;
         const pct = item.change_pct || 0;
-        const trendHtml = pct >= 5  ? `<span class="trend-up">↑ ${pct.toFixed(1)}%</span>`
-                        : pct <= -5 ? `<span class="trend-down">↓ ${Math.abs(pct).toFixed(1)}%</span>`
-                        : '';
-        const row = document.createElement('div');
-        row.className = 'item-row';
-        row.dataset.name = item.keywords;
-        row.innerHTML = `
-          <div class="item-left">
-            <div class="item-name">${item.name}</div>
-            <div class="item-ml">${item.malayalam}</div>
-            ${item.note ? `<div class="item-note">${item.note}</div>` : ''}
+        const trendHtml = pct >= 3
+          ? `<div class="card-trend trend-up">↑ ${pct.toFixed(0)}% from last</div>`
+          : pct <= -3
+          ? `<div class="card-trend trend-down">↓ ${Math.abs(pct).toFixed(0)}% from last</div>`
+          : `<div class="card-trend trend-same">— Stable</div>`;
+
+        const card = document.createElement('div');
+        card.className = 'price-card';
+        card.dataset.keywords = item.keywords;
+        card.dataset.cat = cat;
+        card.innerHTML = `
+          <div class="card-img" style="background:${meta.bg}">${meta.emoji}</div>
+          <div class="card-name">${item.name}</div>
+          <div class="card-ml">${item.malayalam}</div>
+          <div class="card-price">₹${item.wholesale}</div>
+          <div class="card-unit">wholesale${u}</div>
+          <div class="card-range">
+            <span class="tag tag-yellow">₹${item.retail_low}–${item.retail_high}</span>
+            <span class="tag tag-red">↑${item.avoid_above}</span>
           </div>
-          <div class="item-prices">
-            ${pill('pill-green',  `₹${item.wholesale}${u}`)}
-            ${pill('pill-yellow', `₹${item.retail_low}–${item.retail_high}`)}
-            ${pill('pill-red',    `↑${item.avoid_above}`)}
-            ${trendHtml}
-          </div>`;
-        frag.appendChild(row);
+          ${trendHtml}`;
+        frag.appendChild(card);
+        allCards.push(card);
       });
     });
 
-    priceList.appendChild(frag);
+    grid.insertBefore(frag, emptyEl);
 
-    // Search
-    const allRows = priceList.querySelectorAll('.item-row');
-    const sections = priceList.querySelectorAll('[data-section]');
-    input.addEventListener('input', () => {
-      const q = input.value.toLowerCase().trim();
-      let visible = 0;
-      allRows.forEach(row => {
-        const match = !q || (row.dataset.name || '').includes(q) ||
-                      row.textContent.toLowerCase().includes(q);
-        row.classList.toggle('hidden', !match);
-        if (match) visible++;
-      });
-      sections.forEach(sec => {
-        let next = sec.nextElementSibling;
-        let has = false;
-        while (next && !next.hasAttribute('data-section')) {
-          if (!next.classList.contains('hidden') && next.classList.contains('item-row')) { has = true; break; }
-          next = next.nextElementSibling;
-        }
-        sec.style.display = has ? '' : 'none';
-      });
-      emptyEl.style.display = visible === 0 ? 'block' : 'none';
+    // Populate datalist
+    const dl = document.getElementById('item-suggestions');
+    data.items.forEach(item => {
+      const opt = document.createElement('option');
+      opt.value = item.name;
+      dl.appendChild(opt);
     });
+
+    applyFilters();
   }
+
+  function applyFilters() {
+    const q = searchEl.value.toLowerCase().trim();
+    let visible = 0;
+
+    allCards.forEach(card => {
+      const matchCat = activeFilter === 'all' || card.dataset.cat === activeFilter;
+      const matchSearch = !q ||
+        (card.dataset.keywords || '').includes(q) ||
+        card.textContent.toLowerCase().includes(q);
+      const show = matchCat && matchSearch;
+      card.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+
+    // Hide/show section labels
+    document.querySelectorAll('.section-label').forEach(label => {
+      const cat = label.dataset.sectionFor;
+      const hasCat = activeFilter === 'all' || cat === activeFilter;
+      if (!hasCat) { label.style.display = 'none'; return; }
+      // Check if any visible card in this category
+      const hasVisible = allCards.some(c => c.dataset.cat === cat && !c.classList.contains('hidden'));
+      label.style.display = hasVisible ? '' : 'none';
+    });
+
+    emptyEl.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  searchEl.addEventListener('input', applyFilters);
+
+  filtersEl.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-chip');
+    if (!btn) return;
+    document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.cat;
+    applyFilters();
+  });
 
   fetch('prices.json?' + Date.now())
     .then(r => r.json())
-    .then(data => renderItems(data))
+    .then(renderItems)
     .catch(() => {
-      document.getElementById('updated-label').textContent = 'Could not load prices';
+      document.getElementById('updated-label').textContent = 'Could not load';
       emptyEl.style.display = 'block';
     });
+
+  // ── Report panel ─────────────────────────────────────────────────
+  const API     = 'https://script.google.com/macros/s/AKfycbyKC1RqxqfF4DwdDXmkEYZjK-WtpOfkXiErVyFXvKIdGGO7sbT7aOl3Bxt9g4Ha63A/exec';
+  const fab     = document.getElementById('report-fab-btn');
+  const overlay = document.getElementById('report-overlay');
+  const panel   = document.getElementById('report-panel');
+  const form    = document.getElementById('report-form');
+  const msg     = document.getElementById('report-msg');
+  const btn     = document.getElementById('report-submit');
+
+  const openPanel  = () => { overlay.classList.add('open'); panel.classList.add('open'); };
+  const closePanel = () => { overlay.classList.remove('open'); panel.classList.remove('open'); };
+
+  fab.addEventListener('click', openPanel);
+  overlay.addEventListener('click', closePanel);
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    btn.disabled = true; btn.textContent = 'Sending…'; msg.textContent = '';
+    const payload = {
+      action:   'invoice',
+      item:     document.getElementById('r-item').value.trim(),
+      price:    document.getElementById('r-price').value,
+      unit:     document.getElementById('r-unit').value,
+      shop:     document.getElementById('r-shop').value.trim(),
+      location: document.getElementById('r-location').value.trim(),
+      reporter: document.getElementById('r-reporter').value.trim() || 'Anonymous',
+    };
+    try {
+      const res  = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) });
+      const json = await res.json();
+      if (json.ok) {
+        msg.textContent = '✓ Thank you! Price recorded.';
+        msg.style.color = '#2d8a56';
+        form.reset();
+        setTimeout(closePanel, 1800);
+      } else {
+        msg.textContent = '✗ ' + (json.error || 'Could not save. Try again.');
+        msg.style.color = '#c0392b';
+      }
+    } catch {
+      msg.textContent = '✗ Network error — try again.';
+      msg.style.color = '#c0392b';
+    }
+    btn.disabled = false; btn.textContent = 'Submit Price';
+  });
 </script>
 </body>
 </html>

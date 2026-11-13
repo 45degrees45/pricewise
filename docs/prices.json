@@ -1,7 +1,8 @@
 {
-  "updated": "12 Nov 2026",
-  "updated_iso": "2026-11-12T14:00:51.180896+05:30",
+  "updated": "13 Nov 2026",
+  "updated_iso": "2026-11-13T13:45:12.974604+05:30",
   "sources": [
+    "VFPCK",
     "todaypricerates"
   ],
   "items": [
@@ -59,15 +60,15 @@
       "malayalam": "ഉരുളക്കിഴങ്ങ്",
       "category": "Daily Vegetables",
       "keywords": "potato urulakizhangu",
-      "wholesale": 35,
+      "wholesale": 36,
       "retail_low": 35,
       "retail_high": 41,
       "avoid_above": 51,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 35,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 2.9,
+      "trend": "up"
     },
     {
       "id": "green_chilli",
@@ -75,15 +76,15 @@
       "malayalam": "പച്ചമുളക്",
       "category": "Daily Vegetables",
       "keywords": "green chilli mulaku pachamilagu",
-      "wholesale": 55,
+      "wholesale": 60,
       "retail_low": 64,
       "retail_high": 76,
       "avoid_above": 95,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 55,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 9.1,
+      "trend": "up"
     },
     {
       "id": "cucumber",
@@ -91,15 +92,15 @@
       "malayalam": "വെള്ളരിക്ക",
       "category": "Daily Vegetables",
       "keywords": "cucumber vellarikka",
-      "wholesale": 40,
+      "wholesale": 35,
       "retail_low": 28,
       "retail_high": 34,
       "avoid_above": 42,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 40,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -12.5,
+      "trend": "down"
     },
     {
       "id": "ladies_finger",
@@ -155,15 +156,15 @@
       "malayalam": "പാവക്ക",
       "category": "Daily Vegetables",
       "keywords": "bitter gourd karela pavakka",
-      "wholesale": 70,
+      "wholesale": 80,
       "retail_low": 43,
       "retail_high": 51,
       "avoid_above": 64,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 70,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 14.3,
+      "trend": "up"
     },
     {
       "id": "snake_gourd",
@@ -171,15 +172,15 @@
       "malayalam": "പടവലങ്ങ",
       "category": "Daily Vegetables",
       "keywords": "snake gourd padavalanga",
-      "wholesale": 48,
+      "wholesale": 40,
       "retail_low": 39,
       "retail_high": 46,
       "avoid_above": 57,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 48,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -16.7,
+      "trend": "down"
     },
     {
       "id": "bottle_gourd",
@@ -203,15 +204,15 @@
       "malayalam": "കുമ്പളങ്ങ",
       "category": "Daily Vegetables",
       "keywords": "ash gourd kumbalanga winter melon",
-      "wholesale": 30,
+      "wholesale": 28,
       "retail_low": 21,
       "retail_high": 25,
       "avoid_above": 31,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 30,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -6.7,
+      "trend": "down"
     },
     {
       "id": "ridge_gourd",
@@ -251,15 +252,15 @@
       "malayalam": "മുട്ടക്കോസ്",
       "category": "Daily Vegetables",
       "keywords": "cabbage muttakose",
-      "wholesale": 45,
+      "wholesale": 40,
       "retail_low": 34,
       "retail_high": 40,
       "avoid_above": 50,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 45,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -11.1,
+      "trend": "down"
     },
     {
       "id": "cauliflower",
@@ -283,15 +284,15 @@
       "malayalam": "കാരറ്റ്",
       "category": "Daily Vegetables",
       "keywords": "carrot karot",
-      "wholesale": 50,
+      "wholesale": 70,
       "retail_low": 40,
       "retail_high": 48,
       "avoid_above": 59,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 50,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 40.0,
+      "trend": "up"
     },
     {
       "id": "beetroot",
@@ -299,15 +300,15 @@
       "malayalam": "ചീത്ര / ബീറ്റ്",
       "category": "Daily Vegetables",
       "keywords": "beetroot beet cheethara",
-      "wholesale": 40,
+      "wholesale": 50,
       "retail_low": 42,
       "retail_high": 50,
       "avoid_above": 62,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 40,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 25.0,
+      "trend": "up"
     },
     {
       "id": "capsicum",
@@ -331,15 +332,15 @@
       "malayalam": "ഫ്രെഞ്ച് ബീൻസ്",
       "category": "Daily Vegetables",
       "keywords": "french beans beans frensh",
-      "wholesale": 60,
+      "wholesale": 50,
       "retail_low": 60,
       "retail_high": 71,
       "avoid_above": 88,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 60,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -16.7,
+      "trend": "down"
     },
     {
       "id": "drumstick",
@@ -347,15 +348,15 @@
       "malayalam": "മുരിങ്ങക്ക",
       "category": "Daily Vegetables",
       "keywords": "drumstick muringakka",
-      "wholesale": 110,
+      "wholesale": 100,
       "retail_low": 79,
       "retail_high": 94,
       "avoid_above": 116,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 110,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -9.1,
+      "trend": "down"
     },
     {
       "id": "ivy_gourd",
@@ -507,15 +508,15 @@
       "malayalam": "ഏത്തക്ക / നേന്ത്രക്കായ",
       "category": "Kerala Specials",
       "keywords": "raw banana plantain ethakka nenthrakaya vazhakka",
-      "wholesale": 78,
+      "wholesale": 72,
       "retail_low": 13,
       "retail_high": 15,
       "avoid_above": 19,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 78,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -7.7,
+      "trend": "down"
     },
     {
       "id": "banana_flower",
@@ -539,15 +540,15 @@
       "malayalam": "പയർ",
       "category": "Kerala Specials",
       "keywords": "cowpea long beans payar thatta",
-      "wholesale": 60,
+      "wholesale": 70,
       "retail_low": 65,
       "retail_high": 75,
       "avoid_above": 90,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 60,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 16.7,
+      "trend": "up"
     },
     {
       "id": "kudampuli",
@@ -587,15 +588,15 @@
       "malayalam": "ചീര",
       "category": "Leafy Greens",
       "keywords": "spinach cheera amaranth",
-      "wholesale": 40,
+      "wholesale": 42,
       "retail_low": 12,
       "retail_high": 14,
       "avoid_above": 17,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 40,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 5.0,
+      "trend": "up"
     },
     {
       "id": "curry_leaves",

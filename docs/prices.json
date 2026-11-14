@@ -1,8 +1,7 @@
 {
-  "updated": "13 Nov 2026",
-  "updated_iso": "2026-11-13T13:45:12.974604+05:30",
+  "updated": "14 Nov 2026",
+  "updated_iso": "2026-11-14T13:13:09.839243+05:30",
   "sources": [
-    "VFPCK",
     "todaypricerates"
   ],
   "items": [
@@ -66,9 +65,9 @@
       "avoid_above": 51,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 35,
-      "change_pct": 2.9,
-      "trend": "up"
+      "prev_wholesale": 36,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "green_chilli",
@@ -82,9 +81,9 @@
       "avoid_above": 95,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 55,
-      "change_pct": 9.1,
-      "trend": "up"
+      "prev_wholesale": 60,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "cucumber",
@@ -98,9 +97,9 @@
       "avoid_above": 42,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 40,
-      "change_pct": -12.5,
-      "trend": "down"
+      "prev_wholesale": 35,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "ladies_finger",
@@ -162,9 +161,9 @@
       "avoid_above": 64,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 70,
-      "change_pct": 14.3,
-      "trend": "up"
+      "prev_wholesale": 80,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "snake_gourd",
@@ -178,9 +177,9 @@
       "avoid_above": 57,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 48,
-      "change_pct": -16.7,
-      "trend": "down"
+      "prev_wholesale": 40,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "bottle_gourd",
@@ -210,9 +209,9 @@
       "avoid_above": 31,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 30,
-      "change_pct": -6.7,
-      "trend": "down"
+      "prev_wholesale": 28,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "ridge_gourd",
@@ -258,9 +257,9 @@
       "avoid_above": 50,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 45,
-      "change_pct": -11.1,
-      "trend": "down"
+      "prev_wholesale": 40,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "cauliflower",
@@ -290,9 +289,9 @@
       "avoid_above": 59,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 50,
-      "change_pct": 40.0,
-      "trend": "up"
+      "prev_wholesale": 70,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "beetroot",
@@ -306,9 +305,9 @@
       "avoid_above": 62,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 40,
-      "change_pct": 25.0,
-      "trend": "up"
+      "prev_wholesale": 50,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "capsicum",
@@ -338,9 +337,9 @@
       "avoid_above": 88,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 60,
-      "change_pct": -16.7,
-      "trend": "down"
+      "prev_wholesale": 50,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "drumstick",
@@ -354,9 +353,9 @@
       "avoid_above": 116,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 110,
-      "change_pct": -9.1,
-      "trend": "down"
+      "prev_wholesale": 100,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "ivy_gourd",
@@ -514,9 +513,9 @@
       "avoid_above": 19,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 78,
-      "change_pct": -7.7,
-      "trend": "down"
+      "prev_wholesale": 72,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "banana_flower",
@@ -546,9 +545,9 @@
       "avoid_above": 90,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 60,
-      "change_pct": 16.7,
-      "trend": "up"
+      "prev_wholesale": 70,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "kudampuli",
@@ -594,9 +593,9 @@
       "avoid_above": 17,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 40,
-      "change_pct": 5.0,
-      "trend": "up"
+      "prev_wholesale": 42,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "curry_leaves",

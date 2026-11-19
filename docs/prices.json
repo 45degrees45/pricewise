@@ -1,8 +1,7 @@
 {
-  "updated": "18 Nov 2026",
-  "updated_iso": "2026-11-18T14:11:53.015036+05:30",
+  "updated": "19 Nov 2026",
+  "updated_iso": "2026-11-19T14:27:25.872444+05:30",
   "sources": [
-    "VFPCK",
     "todaypricerates"
   ],
   "items": [
@@ -18,9 +17,9 @@
       "avoid_above": 45,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 45,
-      "change_pct": 11.1,
-      "trend": "up"
+      "prev_wholesale": 50,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "onion_big",
@@ -66,9 +65,9 @@
       "avoid_above": 50,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 36,
-      "change_pct": 11.1,
-      "trend": "up"
+      "prev_wholesale": 40,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "green_chilli",
@@ -98,9 +97,9 @@
       "avoid_above": 50,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 35,
-      "change_pct": -20.0,
-      "trend": "down"
+      "prev_wholesale": 28,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "ladies_finger",
@@ -130,9 +129,9 @@
       "avoid_above": 57,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 60,
-      "change_pct": -8.3,
-      "trend": "down"
+      "prev_wholesale": 55,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "brinjal_big",
@@ -162,9 +161,9 @@
       "avoid_above": 71,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 80,
-      "change_pct": 17.5,
-      "trend": "up"
+      "prev_wholesale": 94,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "snake_gourd",
@@ -178,9 +177,9 @@
       "avoid_above": 53,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 40,
-      "change_pct": 5.0,
-      "trend": "up"
+      "prev_wholesale": 42,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "bottle_gourd",
@@ -290,9 +289,9 @@
       "avoid_above": 56,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 70,
-      "change_pct": -14.3,
-      "trend": "down"
+      "prev_wholesale": 60,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "beetroot",
@@ -354,9 +353,9 @@
       "avoid_above": 116,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 100,
-      "change_pct": 40.0,
-      "trend": "up"
+      "prev_wholesale": 140,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "ivy_gourd",
@@ -466,9 +465,9 @@
       "avoid_above": 26,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 60,
-      "change_pct": 8.3,
-      "trend": "up"
+      "prev_wholesale": 65,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "sweet_potato",
@@ -546,9 +545,9 @@
       "avoid_above": 90,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 70,
-      "change_pct": -14.3,
-      "trend": "down"
+      "prev_wholesale": 60,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "kudampuli",
@@ -594,9 +593,9 @@
       "avoid_above": 16,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 42,
-      "change_pct": -4.8,
-      "trend": "down"
+      "prev_wholesale": 40,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "curry_leaves",

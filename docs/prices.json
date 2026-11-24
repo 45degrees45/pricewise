@@ -1,6 +1,6 @@
 {
-  "updated": "23 Nov 2026",
-  "updated_iso": "2026-11-23T14:48:14.758363+05:30",
+  "updated": "24 Nov 2026",
+  "updated_iso": "2026-11-24T16:42:19.019402+05:30",
   "sources": [
     "VFPCK",
     "todaypricerates"
@@ -12,15 +12,15 @@
       "malayalam": "തക്കാളി",
       "category": "Daily Vegetables",
       "keywords": "tomato takkali",
-      "wholesale": 55,
+      "wholesale": 60,
       "retail_low": 34,
       "retail_high": 40,
       "avoid_above": 50,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 55,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 9.1,
+      "trend": "up"
     },
     {
       "id": "onion_big",
@@ -28,15 +28,15 @@
       "malayalam": "സവാള",
       "category": "Daily Vegetables",
       "keywords": "onion big savala savanna",
-      "wholesale": 58,
+      "wholesale": 62,
       "retail_low": 56,
       "retail_high": 66,
       "avoid_above": 82,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 58,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 6.9,
+      "trend": "up"
     },
     {
       "id": "shallot",
@@ -76,15 +76,15 @@
       "malayalam": "പച്ചമുളക്",
       "category": "Daily Vegetables",
       "keywords": "green chilli mulaku pachamilagu",
-      "wholesale": 55,
+      "wholesale": 70,
       "retail_low": 69,
       "retail_high": 82,
       "avoid_above": 102,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 55,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 27.3,
+      "trend": "up"
     },
     {
       "id": "cucumber",
@@ -92,15 +92,15 @@
       "malayalam": "വെള്ളരിക്ക",
       "category": "Daily Vegetables",
       "keywords": "cucumber vellarikka",
-      "wholesale": 32,
+      "wholesale": 34,
       "retail_low": 33,
       "retail_high": 39,
       "avoid_above": 48,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 32,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 6.2,
+      "trend": "up"
     },
     {
       "id": "ladies_finger",
@@ -156,15 +156,15 @@
       "malayalam": "പാവക്ക",
       "category": "Daily Vegetables",
       "keywords": "bitter gourd karela pavakka",
-      "wholesale": 80,
+      "wholesale": 85,
       "retail_low": 42,
       "retail_high": 50,
       "avoid_above": 62,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 80,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 6.2,
+      "trend": "up"
     },
     {
       "id": "snake_gourd",
@@ -172,15 +172,15 @@
       "malayalam": "പടവലങ്ങ",
       "category": "Daily Vegetables",
       "keywords": "snake gourd padavalanga",
-      "wholesale": 42,
+      "wholesale": 40,
       "retail_low": 38,
       "retail_high": 45,
       "avoid_above": 56,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 42,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -4.8,
+      "trend": "down"
     },
     {
       "id": "bottle_gourd",
@@ -284,15 +284,15 @@
       "malayalam": "കാരറ്റ്",
       "category": "Daily Vegetables",
       "keywords": "carrot karot",
-      "wholesale": 55,
+      "wholesale": 60,
       "retail_low": 39,
       "retail_high": 46,
       "avoid_above": 57,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 55,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 9.1,
+      "trend": "up"
     },
     {
       "id": "beetroot",
@@ -332,15 +332,15 @@
       "malayalam": "ഫ്രെഞ്ച് ബീൻസ്",
       "category": "Daily Vegetables",
       "keywords": "french beans beans frensh",
-      "wholesale": 50,
+      "wholesale": 55,
       "retail_low": 60,
       "retail_high": 71,
       "avoid_above": 88,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 50,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 10.0,
+      "trend": "up"
     },
     {
       "id": "drumstick",
@@ -348,15 +348,15 @@
       "malayalam": "മുരിങ്ങക്ക",
       "category": "Daily Vegetables",
       "keywords": "drumstick muringakka",
-      "wholesale": 160,
+      "wholesale": 140,
       "retail_low": 68,
       "retail_high": 81,
       "avoid_above": 101,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 160,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -12.5,
+      "trend": "down"
     },
     {
       "id": "ivy_gourd",
@@ -460,15 +460,15 @@
       "malayalam": "ചേമ്പ്",
       "category": "Kerala Specials",
       "keywords": "colocasia taro chembu arbi",
-      "wholesale": 65,
+      "wholesale": 70,
       "retail_low": 18,
       "retail_high": 21,
       "avoid_above": 26,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 65,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 7.7,
+      "trend": "up"
     },
     {
       "id": "sweet_potato",
@@ -540,15 +540,15 @@
       "malayalam": "പയർ",
       "category": "Kerala Specials",
       "keywords": "cowpea long beans payar thatta",
-      "wholesale": 60,
+      "wholesale": 55,
       "retail_low": 65,
       "retail_high": 75,
       "avoid_above": 90,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 60,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -8.3,
+      "trend": "down"
     },
     {
       "id": "kudampuli",

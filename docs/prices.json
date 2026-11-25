@@ -1,6 +1,6 @@
 {
-  "updated": "24 Nov 2026",
-  "updated_iso": "2026-11-24T16:42:19.019402+05:30",
+  "updated": "25 Nov 2026",
+  "updated_iso": "2026-11-25T15:28:51.862327+05:30",
   "sources": [
     "VFPCK",
     "todaypricerates"
@@ -18,9 +18,9 @@
       "avoid_above": 50,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 55,
-      "change_pct": 9.1,
-      "trend": "up"
+      "prev_wholesale": 60,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "onion_big",
@@ -34,9 +34,9 @@
       "avoid_above": 82,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 58,
-      "change_pct": 6.9,
-      "trend": "up"
+      "prev_wholesale": 62,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "shallot",
@@ -82,9 +82,9 @@
       "avoid_above": 102,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 55,
-      "change_pct": 27.3,
-      "trend": "up"
+      "prev_wholesale": 70,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "cucumber",
@@ -98,9 +98,9 @@
       "avoid_above": 48,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 32,
-      "change_pct": 6.2,
-      "trend": "up"
+      "prev_wholesale": 34,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "ladies_finger",
@@ -156,15 +156,15 @@
       "malayalam": "പാവക്ക",
       "category": "Daily Vegetables",
       "keywords": "bitter gourd karela pavakka",
-      "wholesale": 85,
+      "wholesale": 70,
       "retail_low": 42,
       "retail_high": 50,
       "avoid_above": 62,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 80,
-      "change_pct": 6.2,
-      "trend": "up"
+      "prev_wholesale": 85,
+      "change_pct": -17.6,
+      "trend": "down"
     },
     {
       "id": "snake_gourd",
@@ -172,14 +172,14 @@
       "malayalam": "പടവലങ്ങ",
       "category": "Daily Vegetables",
       "keywords": "snake gourd padavalanga",
-      "wholesale": 40,
+      "wholesale": 38,
       "retail_low": 38,
       "retail_high": 45,
       "avoid_above": 56,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 42,
-      "change_pct": -4.8,
+      "prev_wholesale": 40,
+      "change_pct": -5.0,
       "trend": "down"
     },
     {
@@ -290,9 +290,9 @@
       "avoid_above": 57,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 55,
-      "change_pct": 9.1,
-      "trend": "up"
+      "prev_wholesale": 60,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "beetroot",
@@ -338,9 +338,9 @@
       "avoid_above": 88,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 50,
-      "change_pct": 10.0,
-      "trend": "up"
+      "prev_wholesale": 55,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "drumstick",
@@ -348,15 +348,15 @@
       "malayalam": "മുരിങ്ങക്ക",
       "category": "Daily Vegetables",
       "keywords": "drumstick muringakka",
-      "wholesale": 140,
+      "wholesale": 160,
       "retail_low": 68,
       "retail_high": 81,
       "avoid_above": 101,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 160,
-      "change_pct": -12.5,
-      "trend": "down"
+      "prev_wholesale": 140,
+      "change_pct": 14.3,
+      "trend": "up"
     },
     {
       "id": "ivy_gourd",
@@ -466,9 +466,9 @@
       "avoid_above": 26,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 65,
-      "change_pct": 7.7,
-      "trend": "up"
+      "prev_wholesale": 70,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "sweet_potato",
@@ -546,9 +546,9 @@
       "avoid_above": 90,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 60,
-      "change_pct": -8.3,
-      "trend": "down"
+      "prev_wholesale": 55,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "kudampuli",
@@ -588,15 +588,15 @@
       "malayalam": "ചീര",
       "category": "Leafy Greens",
       "keywords": "spinach cheera amaranth",
-      "wholesale": 42,
+      "wholesale": 40,
       "retail_low": 10,
       "retail_high": 12,
       "avoid_above": 16,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 42,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -4.8,
+      "trend": "down"
     },
     {
       "id": "curry_leaves",
@@ -668,15 +668,15 @@
       "malayalam": "ഇഞ്ചി",
       "category": "Spices & Staples",
       "keywords": "ginger inji",
-      "wholesale": 90,
+      "wholesale": 80,
       "retail_low": 149,
       "retail_high": 178,
       "avoid_above": 220,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 90,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -11.1,
+      "trend": "down"
     },
     {
       "id": "garlic",

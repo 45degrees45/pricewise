@@ -1,6 +1,6 @@
 {
-  "updated": "26 Nov 2026",
-  "updated_iso": "2026-11-26T15:12:49.821596+05:30",
+  "updated": "27 Nov 2026",
+  "updated_iso": "2026-11-27T15:19:01.557182+05:30",
   "sources": [
     "VFPCK",
     "todaypricerates"
@@ -12,15 +12,15 @@
       "malayalam": "തക്കാളി",
       "category": "Daily Vegetables",
       "keywords": "tomato takkali",
-      "wholesale": 60,
+      "wholesale": 55,
       "retail_low": 34,
       "retail_high": 40,
       "avoid_above": 50,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 60,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -8.3,
+      "trend": "down"
     },
     {
       "id": "onion_big",
@@ -28,15 +28,15 @@
       "malayalam": "സവാള",
       "category": "Daily Vegetables",
       "keywords": "onion big savala savanna",
-      "wholesale": 65,
+      "wholesale": 64,
       "retail_low": 56,
       "retail_high": 66,
       "avoid_above": 82,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 62,
-      "change_pct": 4.8,
-      "trend": "up"
+      "prev_wholesale": 65,
+      "change_pct": -1.5,
+      "trend": "down"
     },
     {
       "id": "shallot",
@@ -76,15 +76,15 @@
       "malayalam": "പച്ചമുളക്",
       "category": "Daily Vegetables",
       "keywords": "green chilli mulaku pachamilagu",
-      "wholesale": 65,
+      "wholesale": 70,
       "retail_low": 69,
       "retail_high": 82,
       "avoid_above": 102,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 70,
-      "change_pct": -7.1,
-      "trend": "down"
+      "prev_wholesale": 65,
+      "change_pct": 7.7,
+      "trend": "up"
     },
     {
       "id": "cucumber",
@@ -98,9 +98,9 @@
       "avoid_above": 48,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 34,
-      "change_pct": -17.6,
-      "trend": "down"
+      "prev_wholesale": 28,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "ladies_finger",
@@ -124,15 +124,15 @@
       "malayalam": "വഴുതനങ്ങ",
       "category": "Daily Vegetables",
       "keywords": "brinjal eggplant vazhuthananga",
-      "wholesale": 40,
+      "wholesale": 70,
       "retail_low": 38,
       "retail_high": 45,
       "avoid_above": 56,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 55,
-      "change_pct": -27.3,
-      "trend": "down"
+      "prev_wholesale": 40,
+      "change_pct": 75.0,
+      "trend": "up"
     },
     {
       "id": "brinjal_big",
@@ -156,15 +156,15 @@
       "malayalam": "പാവക്ക",
       "category": "Daily Vegetables",
       "keywords": "bitter gourd karela pavakka",
-      "wholesale": 65,
+      "wholesale": 70,
       "retail_low": 42,
       "retail_high": 50,
       "avoid_above": 62,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 70,
-      "change_pct": -7.1,
-      "trend": "down"
+      "prev_wholesale": 65,
+      "change_pct": 7.7,
+      "trend": "up"
     },
     {
       "id": "snake_gourd",
@@ -172,15 +172,15 @@
       "malayalam": "പടവലങ്ങ",
       "category": "Daily Vegetables",
       "keywords": "snake gourd padavalanga",
-      "wholesale": 38,
+      "wholesale": 381,
       "retail_low": 38,
       "retail_high": 45,
       "avoid_above": 56,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 38,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 902.6,
+      "trend": "up"
     },
     {
       "id": "bottle_gourd",
@@ -284,15 +284,15 @@
       "malayalam": "കാരറ്റ്",
       "category": "Daily Vegetables",
       "keywords": "carrot karot",
-      "wholesale": 60,
+      "wholesale": 50,
       "retail_low": 39,
       "retail_high": 46,
       "avoid_above": 57,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 60,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": -16.7,
+      "trend": "down"
     },
     {
       "id": "beetroot",
@@ -338,9 +338,9 @@
       "avoid_above": 88,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 55,
-      "change_pct": -9.1,
-      "trend": "down"
+      "prev_wholesale": 50,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "drumstick",
@@ -348,15 +348,15 @@
       "malayalam": "മുരിങ്ങക്ക",
       "category": "Daily Vegetables",
       "keywords": "drumstick muringakka",
-      "wholesale": 160,
+      "wholesale": 180,
       "retail_low": 68,
       "retail_high": 81,
       "avoid_above": 101,
       "unit": "kg",
       "note": null,
       "prev_wholesale": 160,
-      "change_pct": 0.0,
-      "trend": "same"
+      "change_pct": 12.5,
+      "trend": "up"
     },
     {
       "id": "ivy_gourd",
@@ -508,15 +508,15 @@
       "malayalam": "ഏത്തക്ക / നേന്ത്രക്കായ",
       "category": "Kerala Specials",
       "keywords": "raw banana plantain ethakka nenthrakaya vazhakka",
-      "wholesale": 65,
+      "wholesale": 62,
       "retail_low": 10,
       "retail_high": 12,
       "avoid_above": 16,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 62,
-      "change_pct": 4.8,
-      "trend": "up"
+      "prev_wholesale": 65,
+      "change_pct": -4.6,
+      "trend": "down"
     },
     {
       "id": "banana_flower",
@@ -546,9 +546,9 @@
       "avoid_above": 90,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 55,
-      "change_pct": -9.1,
-      "trend": "down"
+      "prev_wholesale": 50,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "kudampuli",
@@ -594,9 +594,9 @@
       "avoid_above": 16,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 40,
-      "change_pct": 5.0,
-      "trend": "up"
+      "prev_wholesale": 42,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "curry_leaves",
@@ -674,9 +674,9 @@
       "avoid_above": 220,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 80,
-      "change_pct": 12.5,
-      "trend": "up"
+      "prev_wholesale": 90,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "garlic",

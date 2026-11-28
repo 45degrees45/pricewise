@@ -1,8 +1,7 @@
 {
-  "updated": "27 Nov 2026",
-  "updated_iso": "2026-11-27T15:19:01.557182+05:30",
+  "updated": "28 Nov 2026",
+  "updated_iso": "2026-11-28T14:30:34.380271+05:30",
   "sources": [
-    "VFPCK",
     "todaypricerates"
   ],
   "items": [
@@ -18,9 +17,9 @@
       "avoid_above": 50,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 60,
-      "change_pct": -8.3,
-      "trend": "down"
+      "prev_wholesale": 55,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "onion_big",
@@ -34,9 +33,9 @@
       "avoid_above": 82,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 65,
-      "change_pct": -1.5,
-      "trend": "down"
+      "prev_wholesale": 64,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "shallot",
@@ -82,9 +81,9 @@
       "avoid_above": 102,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 65,
-      "change_pct": 7.7,
-      "trend": "up"
+      "prev_wholesale": 70,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "cucumber",
@@ -130,9 +129,9 @@
       "avoid_above": 56,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 40,
-      "change_pct": 75.0,
-      "trend": "up"
+      "prev_wholesale": 70,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "brinjal_big",
@@ -162,9 +161,9 @@
       "avoid_above": 62,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 65,
-      "change_pct": 7.7,
-      "trend": "up"
+      "prev_wholesale": 70,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "snake_gourd",
@@ -178,9 +177,9 @@
       "avoid_above": 56,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 38,
-      "change_pct": 902.6,
-      "trend": "up"
+      "prev_wholesale": 381,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "bottle_gourd",
@@ -290,9 +289,9 @@
       "avoid_above": 57,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 60,
-      "change_pct": -16.7,
-      "trend": "down"
+      "prev_wholesale": 50,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "beetroot",
@@ -354,9 +353,9 @@
       "avoid_above": 101,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 160,
-      "change_pct": 12.5,
-      "trend": "up"
+      "prev_wholesale": 180,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "ivy_gourd",
@@ -514,9 +513,9 @@
       "avoid_above": 16,
       "unit": "kg",
       "note": null,
-      "prev_wholesale": 65,
-      "change_pct": -4.6,
-      "trend": "down"
+      "prev_wholesale": 62,
+      "change_pct": 0.0,
+      "trend": "same"
     },
     {
       "id": "banana_flower",
